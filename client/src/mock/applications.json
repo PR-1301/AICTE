@@ -67,35 +67,35 @@
         "id": "doc-apex-affidavit",
         "type": "Affidavit for EoA & Land Details",
         "status": "VERIFIED",
-        "image": "/docs/affidavit.png",
+        "image": "/docs/apex_affidavit.png",
         "required": true
       },
       {
         "id": "doc-apex-noc",
         "type": "Fire Safety NOC",
         "status": "VERIFIED",
-        "image": "/docs/noc.png",
+        "image": "/docs/apex_noc.png",
         "required": true
       },
       {
         "id": "doc-apex-land",
         "type": "Land Title & Ownership Deed",
         "status": "VERIFIED",
-        "image": "/docs/land.png",
+        "image": "/docs/apex_land.png",
         "required": true
       },
       {
         "id": "doc-apex-naac",
         "type": "NBA / NAAC Accreditation Certificate",
         "status": "VERIFIED",
-        "image": "/docs/affidavit.png",
+        "image": "/docs/apex_naac.png",
         "required": true
       },
       {
         "id": "doc-apex-ter",
         "type": "TER Processing Fee Receipt",
         "status": "VERIFIED",
-        "image": "/docs/ter.png",
+        "image": "/docs/apex_ter.png",
         "required": true
       }
     ]
