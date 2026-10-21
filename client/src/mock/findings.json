@@ -1,0 +1,209 @@
+[
+  {
+    "id": "F-001",
+    "applicationId": "APP-001",
+    "docId": "doc-affidavit",
+    "rule": "INSTITUTE_NAME_MATCH",
+    "status": "VERIFIED",
+    "severity": "low",
+    "confidence": 0.98,
+    "explanation": "Institute name variation ('Demo Inst. of Tech.' vs 'Demo Institute of Technology') is within allowed similarity threshold (94%). Non-naive fuzzy match accepted.",
+    "evidence": [
+      {
+        "docId": "doc-affidavit",
+        "docName": "Affidavit for EoA & Land Details",
+        "field": "institute_name",
+        "value": "Demo Institute of Technology",
+        "page": 1,
+        "bbox": { "x": 0.15, "y": 0.22, "w": 0.48, "h": 0.04 }
+      },
+      {
+        "docId": "doc-noc",
+        "docName": "Fire Safety NOC",
+        "field": "institute_name",
+        "value": "Demo Inst. of Tech.",
+        "page": 1,
+        "bbox": { "x": 0.18, "y": 0.28, "w": 0.42, "h": 0.04 }
+      }
+    ]
+  },
+  {
+    "id": "F-002",
+    "applicationId": "APP-001",
+    "docId": "doc-noc",
+    "rule": "DOCUMENT_VALIDITY_CHECK",
+    "status": "EXPIRED",
+    "severity": "high",
+    "confidence": 0.99,
+    "explanation": "Fire Safety NOC expired on 30-06-2026. Extension of Approval for academic year 2026-27 requires active validity.",
+    "evidence": [
+      {
+        "docId": "doc-noc",
+        "docName": "Fire Safety NOC",
+        "field": "valid_upto",
+        "value": "30-06-2026",
+        "page": 1,
+        "bbox": { "x": 0.58, "y": 0.48, "w": 0.26, "h": 0.04 }
+      }
+    ]
+  },
+  {
+    "id": "F-003",
+    "applicationId": "APP-001",
+    "docId": "doc-affidavit",
+    "rule": "LAND_AREA_CONSISTENCY",
+    "status": "MISMATCH_DETECTED",
+    "severity": "high",
+    "confidence": 0.94,
+    "explanation": "Land area declared in the affidavit (4.2 acres) differs from the registered land title deed (3.8 acres).",
+    "evidence": [
+      {
+        "docId": "doc-affidavit",
+        "docName": "Affidavit for EoA & Land Details",
+        "field": "land_area",
+        "value": "4.2 acres",
+        "page": 1,
+        "bbox": { "x": 0.18, "y": 0.42, "w": 0.30, "h": 0.04 }
+      },
+      {
+        "docId": "doc-land",
+        "docName": "Land Title & Ownership Deed",
+        "field": "land_area",
+        "value": "3.8 acres",
+        "page": 1,
+        "bbox": { "x": 0.52, "y": 0.31, "w": 0.28, "h": 0.04 }
+      }
+    ]
+  },
+  {
+    "id": "F-004",
+    "applicationId": "APP-001",
+    "docId": "doc-naac",
+    "rule": "MANDATORY_DOCUMENT_CHECK",
+    "status": "MANUAL_REVIEW_REQUIRED",
+    "severity": "high",
+    "confidence": 1.0,
+    "explanation": "Mandatory NBA / NAAC Accreditation Certificate is not submitted in the application bundle. Required for proposed intake increase.",
+    "evidence": []
+  },
+  {
+    "id": "F-005",
+    "applicationId": "APP-001",
+    "docId": "doc-ter",
+    "rule": "TER_FEE_RECONCILIATION",
+    "status": "MISMATCH_DETECTED",
+    "severity": "medium",
+    "confidence": 0.92,
+    "explanation": "TER fee paid according to receipt is ₹1,50,000, but AICTE fee schedule mandates ₹2,00,000 for requested intake increase category.",
+    "evidence": [
+      {
+        "docId": "doc-ter",
+        "docName": "TER Processing Fee Receipt",
+        "field": "fee_amount",
+        "value": "₹1,50,000",
+        "page": 1,
+        "bbox": { "x": 0.45, "y": 0.56, "w": 0.28, "h": 0.04 }
+      }
+    ]
+  },
+  {
+    "id": "F-101",
+    "applicationId": "APP-002",
+    "docId": "doc-apex-affidavit",
+    "rule": "INSTITUTE_NAME_MATCH",
+    "status": "VERIFIED",
+    "severity": "low",
+    "confidence": 1.0,
+    "explanation": "Institute name exactly matches across all submitted institutional records.",
+    "evidence": [
+      {
+        "docId": "doc-apex-affidavit",
+        "docName": "Affidavit for EoA & Land Details",
+        "field": "institute_name",
+        "value": "Apex Institute of Engineering & Technology",
+        "page": 1,
+        "bbox": { "x": 0.15, "y": 0.22, "w": 0.55, "h": 0.04 }
+      }
+    ]
+  },
+  {
+    "id": "F-102",
+    "applicationId": "APP-002",
+    "docId": "doc-apex-noc",
+    "rule": "DOCUMENT_VALIDITY_CHECK",
+    "status": "VERIFIED",
+    "severity": "low",
+    "confidence": 0.99,
+    "explanation": "Fire Safety NOC verified active through 31-12-2027.",
+    "evidence": [
+      {
+        "docId": "doc-apex-noc",
+        "docName": "Fire Safety NOC",
+        "field": "valid_upto",
+        "value": "31-12-2027",
+        "page": 1,
+        "bbox": { "x": 0.58, "y": 0.48, "w": 0.26, "h": 0.04 }
+      }
+    ]
+  },
+  {
+    "id": "F-103",
+    "applicationId": "APP-002",
+    "docId": "doc-apex-land",
+    "rule": "LAND_AREA_CONSISTENCY",
+    "status": "VERIFIED",
+    "severity": "low",
+    "confidence": 0.98,
+    "explanation": "Land area of 5.0 acres fully reconciled between affidavit and registered land record.",
+    "evidence": [
+      {
+        "docId": "doc-apex-land",
+        "docName": "Land Title & Ownership Deed",
+        "field": "land_area",
+        "value": "5.0 acres",
+        "page": 1,
+        "bbox": { "x": 0.52, "y": 0.31, "w": 0.28, "h": 0.04 }
+      }
+    ]
+  },
+  {
+    "id": "F-104",
+    "applicationId": "APP-002",
+    "docId": "doc-apex-naac",
+    "rule": "MANDATORY_DOCUMENT_CHECK",
+    "status": "VERIFIED",
+    "severity": "low",
+    "confidence": 1.0,
+    "explanation": "NAAC Grade 'A+' Accreditation Certificate validated with National Assessment Council records.",
+    "evidence": [
+      {
+        "docId": "doc-apex-naac",
+        "docName": "NBA / NAAC Accreditation Certificate",
+        "field": "grade",
+        "value": "Grade A+",
+        "page": 1,
+        "bbox": { "x": 0.35, "y": 0.40, "w": 0.30, "h": 0.05 }
+      }
+    ]
+  },
+  {
+    "id": "F-105",
+    "applicationId": "APP-002",
+    "docId": "doc-apex-ter",
+    "rule": "TER_FEE_RECONCILIATION",
+    "status": "VERIFIED",
+    "severity": "low",
+    "confidence": 1.0,
+    "explanation": "TER fee payment of ₹1,00,000 matches AICTE fee schedule and bank transaction reference.",
+    "evidence": [
+      {
+        "docId": "doc-apex-ter",
+        "docName": "TER Processing Fee Receipt",
+        "field": "fee_amount",
+        "value": "₹1,00,000",
+        "page": 1,
+        "bbox": { "x": 0.45, "y": 0.56, "w": 0.28, "h": 0.04 }
+      }
+    ]
+  }
+]

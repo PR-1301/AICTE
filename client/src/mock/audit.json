@@ -1,0 +1,65 @@
+[
+  {
+    "id": "AUD-001",
+    "applicationId": "APP-001",
+    "ts": "2026-10-12T10:12:00Z",
+    "actor": "system",
+    "action": "RULE_APPLIED",
+    "detail": "INSTITUTE_NAME_MATCH v2.1 executed on doc-affidavit and doc-noc. Fuzzy score 0.94 within threshold.",
+    "ref": "F-001"
+  },
+  {
+    "id": "AUD-002",
+    "applicationId": "APP-001",
+    "ts": "2026-10-12T10:12:30Z",
+    "actor": "system",
+    "action": "RECORD_CHECKED",
+    "detail": "State Fire Services Portal registry query for NOC #FS-2024-9982. Expiry date confirmed 30-06-2026.",
+    "ref": "F-002"
+  },
+  {
+    "id": "AUD-003",
+    "applicationId": "APP-001",
+    "ts": "2026-10-12T10:13:15Z",
+    "actor": "system",
+    "action": "ALERT_RAISED",
+    "detail": "DOCUMENT_VALIDITY_CHECK flagged Fire Safety NOC as EXPIRED.",
+    "ref": "F-002"
+  },
+  {
+    "id": "AUD-004",
+    "applicationId": "APP-001",
+    "ts": "2026-10-12T10:14:02Z",
+    "actor": "system",
+    "action": "RULE_APPLIED",
+    "detail": "LAND_AREA_CONSISTENCY v1.2 detected discrepancy: Affidavit (4.2 acres) vs Deed (3.8 acres).",
+    "ref": "F-003"
+  },
+  {
+    "id": "AUD-005",
+    "applicationId": "APP-001",
+    "ts": "2026-10-12T10:14:45Z",
+    "actor": "system",
+    "action": "RULE_APPLIED",
+    "detail": "MANDATORY_DOCUMENT_CHECK identified missing NAAC/NBA certificate for intake expansion.",
+    "ref": "F-004"
+  },
+  {
+    "id": "AUD-006",
+    "applicationId": "APP-001",
+    "ts": "2026-10-12T10:15:10Z",
+    "actor": "system",
+    "action": "SOURCE_RESPONSE",
+    "detail": "Payment gateway reconciliation response: payment mismatch (Paid: ₹1,50,000, Expected: ₹2,00,000).",
+    "ref": "F-005"
+  },
+  {
+    "id": "AUD-007",
+    "applicationId": "APP-004",
+    "ts": "2026-10-10T14:22:00Z",
+    "actor": "officer-01",
+    "action": "DECISION_SUBMITTED",
+    "detail": "Application approved. All statutory conditions verified with issuing authority.",
+    "ref": "APP-004"
+  }
+]

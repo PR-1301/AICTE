@@ -1,0 +1,52 @@
+[
+  {
+    "id": "ALT-001",
+    "type": "DOCUMENT_EXPIRED",
+    "title": "Fire NOC Expired for Demo Institute of Technology",
+    "applicationId": "APP-001",
+    "institute": "Demo Institute of Technology",
+    "severity": "high",
+    "message": "Fire safety certificate expired on 30-06-2026. Immediate renewal or clarification required.",
+    "ts": "2026-10-12T10:13:15Z"
+  },
+  {
+    "id": "ALT-002",
+    "type": "UNRESOLVED_DISCREPANCY",
+    "title": "Land Area Inconsistency (0.4 acre delta)",
+    "applicationId": "APP-001",
+    "institute": "Demo Institute of Technology",
+    "severity": "high",
+    "message": "Affidavit claims 4.2 acres whereas registered title deed specifies 3.8 acres.",
+    "ts": "2026-10-12T10:14:02Z"
+  },
+  {
+    "id": "ALT-003",
+    "type": "MISSING_DOCUMENT",
+    "title": "Mandatory NAAC/NBA Accreditation Absent",
+    "applicationId": "APP-001",
+    "institute": "Demo Institute of Technology",
+    "severity": "high",
+    "message": "Required accreditation certificate not uploaded in application bundle.",
+    "ts": "2026-10-12T10:14:45Z"
+  },
+  {
+    "id": "ALT-004",
+    "type": "PAYMENT_MISMATCH",
+    "title": "TER Processing Fee Shortfall (₹50,000)",
+    "applicationId": "APP-001",
+    "institute": "Demo Institute of Technology",
+    "severity": "medium",
+    "message": "Payment receipt ₹1,50,000 does not match required fee of ₹2,00,000.",
+    "ts": "2026-10-12T10:15:10Z"
+  },
+  {
+    "id": "ALT-005",
+    "type": "PENDING_VERIFICATION",
+    "title": "3 Documents Pending Source Verification",
+    "applicationId": "APP-006",
+    "institute": "Kalyani Institute of Pharmaceutical Sciences",
+    "severity": "low",
+    "message": "Automated verification queries queued with affiliating university registrar.",
+    "ts": "2026-10-15T09:30:00Z"
+  }
+]

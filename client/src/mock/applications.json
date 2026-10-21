@@ -1,0 +1,205 @@
+[
+  {
+    "id": "APP-001",
+    "institute": "Demo Institute of Technology",
+    "category": "EoA - Intake Increase",
+    "status": "VALIDATION_COMPLETE",
+    "submittedOn": "2026-10-12",
+    "counts": {
+      "verified": 3,
+      "mismatch": 2,
+      "expired": 1,
+      "manualReview": 1
+    },
+    "documents": [
+      {
+        "id": "doc-affidavit",
+        "type": "Affidavit for EoA & Land Details",
+        "status": "MISMATCH_DETECTED",
+        "image": "/docs/affidavit.png",
+        "required": true
+      },
+      {
+        "id": "doc-noc",
+        "type": "Fire Safety NOC",
+        "status": "EXPIRED",
+        "image": "/docs/noc.png",
+        "required": true
+      },
+      {
+        "id": "doc-land",
+        "type": "Land Title & Ownership Deed",
+        "status": "MISMATCH_DETECTED",
+        "image": "/docs/land.png",
+        "required": true
+      },
+      {
+        "id": "doc-naac",
+        "type": "NBA / NAAC Accreditation Certificate",
+        "status": "MANUAL_REVIEW_REQUIRED",
+        "image": null,
+        "required": true,
+        "notSubmitted": true
+      },
+      {
+        "id": "doc-ter",
+        "type": "TER Processing Fee Receipt",
+        "status": "MISMATCH_DETECTED",
+        "image": "/docs/ter.png",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "APP-002",
+    "institute": "Apex Institute of Engineering & Technology",
+    "category": "Extension of Approval (EoA)",
+    "status": "VALIDATION_COMPLETE",
+    "submittedOn": "2026-10-14",
+    "counts": {
+      "verified": 5,
+      "mismatch": 0,
+      "expired": 0,
+      "manualReview": 0
+    },
+    "documents": [
+      {
+        "id": "doc-apex-affidavit",
+        "type": "Affidavit for EoA & Land Details",
+        "status": "VERIFIED",
+        "image": "/docs/affidavit.png",
+        "required": true
+      },
+      {
+        "id": "doc-apex-noc",
+        "type": "Fire Safety NOC",
+        "status": "VERIFIED",
+        "image": "/docs/noc.png",
+        "required": true
+      },
+      {
+        "id": "doc-apex-land",
+        "type": "Land Title & Ownership Deed",
+        "status": "VERIFIED",
+        "image": "/docs/land.png",
+        "required": true
+      },
+      {
+        "id": "doc-apex-naac",
+        "type": "NBA / NAAC Accreditation Certificate",
+        "status": "VERIFIED",
+        "image": "/docs/affidavit.png",
+        "required": true
+      },
+      {
+        "id": "doc-apex-ter",
+        "type": "TER Processing Fee Receipt",
+        "status": "VERIFIED",
+        "image": "/docs/ter.png",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "APP-003",
+    "institute": "Vidyapeeth College of Engineering",
+    "category": "EoA - New Course Addition",
+    "status": "UNDER_OFFICER_REVIEW",
+    "submittedOn": "2026-10-10",
+    "counts": {
+      "verified": 4,
+      "mismatch": 1,
+      "expired": 0,
+      "manualReview": 0
+    },
+    "documents": [
+      {
+        "id": "doc-vce-affidavit",
+        "type": "Affidavit for EoA & Land Details",
+        "status": "VERIFIED",
+        "image": "/docs/affidavit.png",
+        "required": true
+      },
+      {
+        "id": "doc-vce-noc",
+        "type": "Fire Safety NOC",
+        "status": "VERIFIED",
+        "image": "/docs/noc.png",
+        "required": true
+      },
+      {
+        "id": "doc-vce-land",
+        "type": "Land Title & Ownership Deed",
+        "status": "MISMATCH_DETECTED",
+        "image": "/docs/land.png",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "APP-004",
+    "institute": "National Polytechnic Institute",
+    "category": "Extension of Approval (EoA)",
+    "status": "APPROVED",
+    "submittedOn": "2026-10-08",
+    "counts": {
+      "verified": 5,
+      "mismatch": 0,
+      "expired": 0,
+      "manualReview": 0
+    },
+    "documents": [
+      {
+        "id": "doc-npi-affidavit",
+        "type": "Affidavit for EoA & Land Details",
+        "status": "VERIFIED",
+        "image": "/docs/affidavit.png",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "APP-005",
+    "institute": "Saraswati Institute of Management",
+    "category": "EoA - Intake Increase",
+    "status": "INFO_REQUESTED",
+    "submittedOn": "2026-10-06",
+    "counts": {
+      "verified": 2,
+      "mismatch": 2,
+      "expired": 1,
+      "manualReview": 0
+    },
+    "documents": [
+      {
+        "id": "doc-sim-noc",
+        "type": "Fire Safety NOC",
+        "status": "EXPIRED",
+        "image": "/docs/noc.png",
+        "required": true
+      }
+    ]
+  },
+  {
+    "id": "APP-006",
+    "institute": "Kalyani Institute of Pharmaceutical Sciences",
+    "category": "Extension of Approval (EoA)",
+    "status": "AI_VALIDATING",
+    "submittedOn": "2026-10-15",
+    "counts": {
+      "verified": 1,
+      "mismatch": 0,
+      "expired": 0,
+      "manualReview": 0
+    },
+    "documents": [
+      {
+        "id": "doc-kips-affidavit",
+        "type": "Affidavit for EoA & Land Details",
+        "status": "VERIFICATION_PENDING",
+        "image": "/docs/affidavit.png",
+        "required": true
+      }
+    ]
+  }
+]

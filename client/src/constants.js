@@ -1,0 +1,91 @@
+/**
+ * Authoritative constants and status vocabulary for AICTE Application Validation Platform (SIH26261).
+ * Follows AGENTS.md sections 3, 6, and 7 strictly.
+ */
+
+// PS status vocabulary (Non-negotiable domain rule #4)
+export const FINDING_STATUS = {
+  VERIFIED: 'VERIFIED',
+  MISMATCH_DETECTED: 'MISMATCH_DETECTED',
+  EXPIRED: 'EXPIRED',
+  VERIFICATION_PENDING: 'VERIFICATION_PENDING',
+  SOURCE_UNAVAILABLE: 'SOURCE_UNAVAILABLE',
+  MANUAL_REVIEW_REQUIRED: 'MANUAL_REVIEW_REQUIRED',
+};
+
+export const FINDING_STATUS_LABELS = {
+  [FINDING_STATUS.VERIFIED]: 'Verified',
+  [FINDING_STATUS.MISMATCH_DETECTED]: 'Mismatch detected',
+  [FINDING_STATUS.EXPIRED]: 'Expired',
+  [FINDING_STATUS.VERIFICATION_PENDING]: 'Verification pending',
+  [FINDING_STATUS.SOURCE_UNAVAILABLE]: 'Source unavailable',
+  [FINDING_STATUS.MANUAL_REVIEW_REQUIRED]: 'Manual review required',
+};
+
+// Application lifecycle statuses
+export const APPLICATION_STATUS = {
+  DRAFT: 'DRAFT',
+  SUBMITTED: 'SUBMITTED',
+  AI_VALIDATING: 'AI_VALIDATING',
+  VALIDATION_COMPLETE: 'VALIDATION_COMPLETE',
+  UNDER_OFFICER_REVIEW: 'UNDER_OFFICER_REVIEW',
+  APPROVED: 'APPROVED',
+  INFO_REQUESTED: 'INFO_REQUESTED',
+  SENT_FOR_INSPECTION: 'SENT_FOR_INSPECTION',
+};
+
+export const APPLICATION_STATUS_LABELS = {
+  [APPLICATION_STATUS.DRAFT]: 'Draft',
+  [APPLICATION_STATUS.SUBMITTED]: 'Submitted',
+  [APPLICATION_STATUS.AI_VALIDATING]: 'AI Validating',
+  [APPLICATION_STATUS.VALIDATION_COMPLETE]: 'Validation Complete',
+  [APPLICATION_STATUS.UNDER_OFFICER_REVIEW]: 'Under Officer Review',
+  [APPLICATION_STATUS.APPROVED]: 'Approved',
+  [APPLICATION_STATUS.INFO_REQUESTED]: 'More Info Requested',
+  [APPLICATION_STATUS.SENT_FOR_INSPECTION]: 'Sent for Inspection',
+};
+
+// Severity levels
+export const SEVERITY = {
+  LOW: 'low',
+  MEDIUM: 'medium',
+  HIGH: 'high',
+};
+
+export const SEVERITY_LABELS = {
+  [SEVERITY.LOW]: 'Low Severity',
+  [SEVERITY.MEDIUM]: 'Medium Severity',
+  [SEVERITY.HIGH]: 'High Severity',
+};
+
+// Officer decision types
+export const DECISION_TYPE = {
+  APPROVE: 'APPROVE',
+  REQUEST_MORE_INFO: 'REQUEST_MORE_INFO',
+  SEND_FOR_INSPECTION: 'SEND_FOR_INSPECTION',
+};
+
+export const DECISION_LABELS = {
+  [DECISION_TYPE.APPROVE]: 'Approve Application',
+  [DECISION_TYPE.REQUEST_MORE_INFO]: 'Request More Information',
+  [DECISION_TYPE.SEND_FOR_INSPECTION]: 'Send for Physical Inspection',
+};
+
+// Audit event actors & actions
+export const AUDIT_ACTOR = {
+  SYSTEM: 'system',
+  OFFICER: 'officer-01',
+};
+
+export const AUDIT_ACTION = {
+  RULE_APPLIED: 'RULE_APPLIED',
+  RECORD_CHECKED: 'RECORD_CHECKED',
+  SOURCE_RESPONSE: 'SOURCE_RESPONSE',
+  ALERT_RAISED: 'ALERT_RAISED',
+  DECISION_SUBMITTED: 'DECISION_SUBMITTED',
+};
+
+// Standard disclaimers & UI labels
+export const DISCLAIMER_ADVISORY = 'AI findings are advisory. The decision rests with the officer.';
+export const DISCLAIMER_PRELIMINARY = 'Preliminary indicator. Human verification required.';
+export const DEMO_RIBBON_TEXT = 'Concept demo · synthetic data';
