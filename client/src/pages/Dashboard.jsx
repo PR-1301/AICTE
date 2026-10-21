@@ -262,15 +262,15 @@ export default function Dashboard() {
   return (
     <div className="space-y-7 pb-16 text-slate-800">
       {/* 1. Header Banner */}
-      <div className="bg-white rounded-xl border border-slate-200/90 shadow-xs p-6 sm:p-7 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
-        <div className="space-y-2">
-          <div className="flex items-center space-x-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#1F6FEB] animate-pulse"></span>
-            <span className="text-xs font-mono font-bold tracking-wider uppercase text-[#1F6FEB]">
-              AICTE Regulatory Commission &middot; Scrutiny Wing
-            </span>
+      <div className="bg-white rounded-xl border border-slate-200/90 shadow-sm p-6 sm:p-7 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+        <div className="space-y-2.5">
+          <div className="inline-flex items-center space-x-2 text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
+            <span className="w-2 h-2 rounded-full bg-blue-600"></span>
+            <span>Department of Higher Education</span>
+            <span className="text-slate-400">·</span>
+            <span className="text-[#0A192F] font-bold">Scrutiny & Regulation Wing</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F2A4A] tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0A192F] tracking-tight">
             Officer Scrutiny Worklist
           </h1>
           <p className="text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed">

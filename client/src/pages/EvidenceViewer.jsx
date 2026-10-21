@@ -125,80 +125,77 @@ export default function EvidenceViewer() {
 
   return (
     <div className="space-y-6 pb-16">
-      {/* Top Navigation Bar: Back button */}
-      <div className="flex items-center justify-between">
-        <Link
-          to={`/officer/applications/${appId}`}
-          className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-lg bg-white border border-slate-200 text-sm font-semibold text-slate-700 hover:text-[#0F2A4A] hover:bg-slate-50 transition-colors shadow-2xs focus:outline-none focus:ring-2 focus:ring-[#1F6FEB]"
-        >
-          <svg className="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          <span>Return to Application Review ({appId})</span>
-        </Link>
-      </div>
+      {/* Top Navigation & Finding Switcher Workbench */}
+      <div className="bg-white rounded-xl border border-slate-200/90 shadow-sm p-5 space-y-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+          <div className="flex items-center space-x-3">
+            <Link
+              to={`/officer/applications/${appId}`}
+              className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-xs font-bold text-slate-700 transition-colors cursor-pointer border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#1F6FEB]"
+            >
+              <svg className="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              <span>Back to Docket</span>
+            </Link>
 
-      {/* Breadcrumbs & Interactive Finding Selector Bar */}
-      <div className="bg-white rounded-xl border border-slate-200/90 shadow-xs p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <nav aria-label="Breadcrumb" className="flex items-center space-x-2 text-xs font-medium text-slate-500 mb-1.5">
-            <Link to="/officer/dashboard" className="hover:text-[#1F6FEB] transition-colors">
-              Dashboard
-            </Link>
-            <span className="text-slate-300">/</span>
-            <Link to={`/officer/applications/${appId}`} className="hover:text-[#1F6FEB] transition-colors">
-              {appId} ({application.institute})
-            </Link>
-            <span className="text-slate-300">/</span>
-            <span className="text-slate-900 font-bold">Evidence: {fid}</span>
-          </nav>
-          <div className="flex items-center space-x-3 flex-wrap gap-y-2">
-            <h1 className="text-xl sm:text-2xl font-bold text-[#0F2A4A] tracking-tight">
-              Scrutiny Evidence Viewer
-            </h1>
-            <StatusBadge status={finding.status} size="sm" />
+            <span className="text-slate-300">|</span>
+
+            <div>
+              <div className="text-xs text-slate-500 font-medium">
+                Application <span className="font-mono font-bold text-[#0A192F]">{appId}</span> · {application.institute}
+              </div>
+              <h1 className="text-xl sm:text-2xl font-extrabold text-[#0A192F] tracking-tight">
+                Dual Document Scrutiny Workbench
+              </h1>
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-3 shrink-0">
+            <StatusBadge status={finding.status} size="md" />
           </div>
         </div>
 
         {/* Quick Sibling Findings Switcher */}
         {allFindings.length > 0 && (
-          <div className="flex items-center space-x-1.5 overflow-x-auto pb-1 md:pb-0 shrink-0">
-            <span className="text-xs text-slate-500 font-semibold shrink-0 mr-1">
-              Switch Finding:
+          <div className="flex items-center space-x-2 overflow-x-auto pb-1 text-xs">
+            <span className="text-xs text-slate-500 font-semibold shrink-0">
+              Findings in Docket:
             </span>
-            {allFindings.map((f) => {
-              const isActive = f.id === fid;
-              const isStatusVerified = f.status === FINDING_STATUS.VERIFIED;
-              const isStatusExpired = f.status === FINDING_STATUS.EXPIRED;
-              const isStatusMismatch = f.status === FINDING_STATUS.MISMATCH_DETECTED;
+            <div className="flex items-center space-x-1.5">
+              {allFindings.map((f, idx) => {
+                const isActive = f.id === fid;
+                const isStatusVerified = f.status === FINDING_STATUS.VERIFIED;
+                const isStatusExpired = f.status === FINDING_STATUS.EXPIRED;
+                const isStatusMismatch = f.status === FINDING_STATUS.MISMATCH_DETECTED;
 
-              return (
-                <button
-                  key={f.id}
-                  type="button"
-                  onClick={() => navigate(`/officer/applications/${appId}/findings/${f.id}`)}
-                  className={`inline-flex items-center space-x-1.5 text-xs px-2.5 py-1.5 rounded-lg font-mono font-bold border transition-colors shrink-0 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#1F6FEB] ${
-                    isActive
-                      ? 'bg-[#0F2A4A] text-white border-[#0F2A4A] shadow-xs'
-                      : 'bg-slate-50 text-slate-700 border-slate-200/90 hover:bg-slate-100'
-                  }`}
-                  title={`${f.rule} - ${f.status}`}
-                >
-                  <span
-                    className={`w-2 h-2 rounded-full ${
-                      isStatusVerified
-                        ? 'bg-emerald-400'
-                        : isStatusExpired
-                        ? 'bg-rose-500'
-                        : isStatusMismatch
-                        ? 'bg-amber-400'
-                        : 'bg-purple-400'
+                return (
+                  <button
+                    key={f.id}
+                    type="button"
+                    onClick={() => navigate(`/officer/applications/${appId}/findings/${f.id}`)}
+                    className={`inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg font-mono text-xs font-bold border transition-all shrink-0 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#1F6FEB] ${
+                      isActive
+                        ? 'bg-[#0A192F] text-white border-[#0A192F] shadow-xs ring-2 ring-blue-500/30'
+                        : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-50'
                     }`}
-                  />
-                  <span>{f.id}</span>
-                </button>
-              );
-            })}
+                  >
+                    <span
+                      className={`w-2 h-2 rounded-full ${
+                        isStatusVerified
+                          ? 'bg-emerald-500'
+                          : isStatusExpired
+                          ? 'bg-rose-500'
+                          : isStatusMismatch
+                          ? 'bg-amber-500'
+                          : 'bg-indigo-500'
+                      }`}
+                    />
+                    <span>Finding {idx + 1}: {f.id}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         )}
       </div>
@@ -234,42 +231,40 @@ export default function EvidenceViewer() {
 
           {/* Case 2: Expired Document (Single document highlight + Right card showing Source Expiry details) */}
           {isExpired && !isMismatch && (
-            <div className="bg-white rounded-xl border border-slate-200/90 shadow-xs flex flex-col h-full overflow-hidden">
-              <div className="bg-slate-50/90 border-b border-slate-200/80 px-5 py-3.5 flex items-center justify-between">
+            <div className="bg-white rounded-xl border border-slate-200/90 shadow-sm flex flex-col h-full overflow-hidden">
+              <div className="bg-[#0A192F] text-white px-5 py-3 flex items-center justify-between border-b border-slate-800">
                 <div className="flex items-center space-x-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
-                  <h3 className="text-base font-bold text-slate-800">
-                    State Registry / Source Verification Record
+                  <span className="w-2 h-2 rounded-full bg-rose-400 ring-4 ring-rose-950/60"></span>
+                  <h3 className="text-sm font-bold text-slate-100">
+                    State Fire Directorate Registry Verification
                   </h3>
                 </div>
                 <StatusBadge status={FINDING_STATUS.EXPIRED} size="sm" />
               </div>
 
-              <div className="flex-1 p-6 flex flex-col justify-center space-y-4 bg-slate-50/50">
-                <div className="p-4 rounded-xl bg-rose-50 border border-rose-200/80 space-y-2">
-                  <div className="flex items-center space-x-2 text-rose-800 font-bold text-base">
-                    <svg className="w-5 h-5 text-rose-600 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                    </svg>
-                    <span>Statutory Validity Window Expired</span>
+              <div className="flex-1 p-6 flex flex-col justify-center space-y-4 bg-[#F8FAFC]">
+                <div className="p-4 rounded-xl bg-rose-50 border border-rose-200 space-y-2">
+                  <div className="flex items-center space-x-2 text-rose-900 font-bold text-sm">
+                    <span className="w-2 h-2 rounded-full bg-rose-600"></span>
+                    <span>Statutory Validity Lapsed Before Anchor Date</span>
                   </div>
-                  <p className="text-sm text-rose-950 leading-relaxed font-medium">
-                    Automated check queried State Directorate of Fire & Emergency Services Registry. Certificate validity lapsed on <strong>30-06-2026</strong>. Technical institutions must maintain an active Fire Safety Clearance throughout the Academic Year 2026-27.
+                  <p className="text-xs sm:text-sm text-rose-950 leading-relaxed font-medium">
+                    Registry inquiry verified against State Directorate of Fire & Emergency Services records. The submitted No-Objection Certificate lapsed on <strong>30-06-2026</strong>. Statutory norms mandate an uninterrupted active permit throughout the Academic Year 2026–27.
                   </p>
                 </div>
 
-                <div className="bg-white p-4 rounded-lg border border-slate-200/90 text-sm space-y-2.5 text-slate-700 shadow-2xs">
+                <div className="bg-white p-4 rounded-xl border border-slate-200 text-xs sm:text-sm space-y-3 text-slate-700 shadow-xs">
                   <div className="flex justify-between py-1 border-b border-slate-100">
-                    <span className="text-slate-500 font-medium">Issuing Registry Authority:</span>
-                    <span className="font-semibold text-slate-800">Directorate of Fire & Emergency Services</span>
+                    <span className="text-slate-500 font-medium">Issuing Authority:</span>
+                    <span className="font-semibold text-slate-900">Directorate of Fire & Emergency Services</span>
                   </div>
                   <div className="flex justify-between py-1 border-b border-slate-100">
                     <span className="text-slate-500 font-medium">Lapsed Certificate Validity:</span>
                     <span className="font-bold text-rose-700 font-mono">30-06-2026</span>
                   </div>
                   <div className="flex justify-between py-1">
-                    <span className="text-slate-500 font-medium">Recommended Officer Action:</span>
-                    <span className="font-bold text-amber-800">Issue Request for Renewed NOC</span>
+                    <span className="text-slate-500 font-medium">Mandated Statutory Action:</span>
+                    <span className="font-bold text-amber-800">Issue Notice for Current Valid NOC</span>
                   </div>
                 </div>
               </div>
@@ -278,42 +273,40 @@ export default function EvidenceViewer() {
 
           {/* Case 3: Missing Document (Right card showing Statutory Checklist requirement) */}
           {isMissing && (
-            <div className="bg-white rounded-xl border border-slate-200/90 shadow-xs flex flex-col h-full overflow-hidden">
-              <div className="bg-slate-50/90 border-b border-slate-200/80 px-5 py-3.5 flex items-center justify-between">
+            <div className="bg-white rounded-xl border border-slate-200/90 shadow-sm flex flex-col h-full overflow-hidden">
+              <div className="bg-[#0A192F] text-white px-5 py-3 flex items-center justify-between border-b border-slate-800">
                 <div className="flex items-center space-x-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
-                  <h3 className="text-base font-bold text-slate-800">
-                    Statutory Rule Norm Requirement
+                  <span className="w-2 h-2 rounded-full bg-rose-400 ring-4 ring-rose-950/60"></span>
+                  <h3 className="text-sm font-bold text-slate-100">
+                    Statutory Gate Norm: Mandatory Accreditation
                   </h3>
                 </div>
                 <StatusBadge status={FINDING_STATUS.MANUAL_REVIEW_REQUIRED} size="sm" />
               </div>
 
-              <div className="flex-1 p-6 flex flex-col justify-center space-y-4 bg-slate-50/50">
+              <div className="flex-1 p-6 flex flex-col justify-center space-y-4 bg-[#F8FAFC]">
                 <div className="p-4 rounded-xl bg-amber-50 border border-amber-300 space-y-2">
-                  <div className="flex items-center space-x-2 text-amber-950 font-bold text-base">
-                    <svg className="w-5 h-5 text-amber-700 shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                    </svg>
+                  <div className="flex items-center space-x-2 text-amber-950 font-bold text-sm">
+                    <span className="w-2 h-2 rounded-full bg-amber-600"></span>
                     <span>Approval Process Handbook Norm (Rule 2.4)</span>
                   </div>
-                  <p className="text-sm text-amber-950 leading-relaxed font-medium">
+                  <p className="text-xs sm:text-sm text-amber-950 leading-relaxed font-medium">
                     Under AICTE Regulations Chapter II, any technical institution requesting an <strong>Intake Increase</strong> or <strong>New Course Addition</strong> must hold valid NBA accreditation for eligible programs or NAAC accreditation with minimum Grade &lsquo;A&rsquo;.
                   </p>
                 </div>
 
-                <div className="bg-white p-4 rounded-lg border border-slate-200/90 text-sm space-y-2.5 text-slate-700 shadow-2xs">
+                <div className="bg-white p-4 rounded-xl border border-slate-200 text-xs sm:text-sm space-y-3 text-slate-700 shadow-xs">
                   <div className="flex justify-between py-1 border-b border-slate-100">
                     <span className="text-slate-500 font-medium">Category Applied:</span>
                     <span className="font-semibold text-slate-800">{application.category}</span>
                   </div>
                   <div className="flex justify-between py-1 border-b border-slate-100">
-                    <span className="text-slate-500 font-medium">Required Document:</span>
-                    <span className="font-semibold text-slate-900">NBA / NAAC Certificate</span>
+                    <span className="text-slate-500 font-medium">Required Statutory Filing:</span>
+                    <span className="font-semibold text-slate-900">NBA / NAAC Grade Certificate</span>
                   </div>
                   <div className="flex justify-between py-1">
-                    <span className="text-slate-500 font-medium">Submission Status:</span>
-                    <span className="font-bold text-rose-700">Omitted (Not Submitted)</span>
+                    <span className="text-slate-500 font-medium">Submission State:</span>
+                    <span className="font-bold text-rose-700">Omitted from Package (Deficiency)</span>
                   </div>
                 </div>
               </div>
