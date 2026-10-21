@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import DashboardPlaceholder from './pages/DashboardPlaceholder';
 import ApplicationReviewPlaceholder from './pages/ApplicationReviewPlaceholder';
-import EvidenceViewerPlaceholder from './pages/EvidenceViewerPlaceholder';
+import EvidenceViewer from './pages/EvidenceViewer';
 import AuditTrailPlaceholder from './pages/AuditTrailPlaceholder';
 import ComponentsShowcase from './pages/ComponentsShowcase';
 
@@ -19,7 +19,7 @@ export default function App() {
         <Route path="/officer" element={<Layout />}>
           <Route path="dashboard" element={<DashboardPlaceholder />} />
           <Route path="applications/:id" element={<ApplicationReviewPlaceholder />} />
-          <Route path="applications/:id/findings/:fid" element={<EvidenceViewerPlaceholder />} />
+          <Route path="applications/:id/findings/:fid" element={<EvidenceViewer />} />
           <Route path="audit" element={<AuditTrailPlaceholder />} />
           {/* Temporary inspection route for Step 3 visual check */}
           <Route path="_components" element={<ComponentsShowcase />} />

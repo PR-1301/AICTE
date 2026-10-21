@@ -19,12 +19,24 @@ export default function ApplicationReviewPlaceholder() {
         <span>Application ID:</span>
         <span className="font-bold text-[#0F2A4A]">{id || 'APP-001'}</span>
       </div>
-      <div>
+      <div className="flex flex-wrap justify-center gap-3 pt-2">
         <Link
           to={`/officer/applications/${id || 'APP-001'}/findings/F-003`}
-          className="text-xs text-[#1F6FEB] hover:underline"
+          className="text-xs px-3 py-1.5 rounded-md bg-amber-50 text-amber-900 border border-amber-300 hover:bg-amber-100 font-medium"
         >
-          Preview Evidence Viewer route →
+          Case 1: Mismatch (F-003 Land Area) →
+        </Link>
+        <Link
+          to={`/officer/applications/${id || 'APP-001'}/findings/F-002`}
+          className="text-xs px-3 py-1.5 rounded-md bg-rose-50 text-rose-900 border border-rose-300 hover:bg-rose-100 font-medium"
+        >
+          Case 2: Expired (F-002 Fire NOC) →
+        </Link>
+        <Link
+          to={`/officer/applications/${id || 'APP-001'}/findings/F-004`}
+          className="text-xs px-3 py-1.5 rounded-md bg-purple-50 text-purple-900 border border-purple-300 hover:bg-purple-100 font-medium"
+        >
+          Case 3: Missing Doc (F-004 NAAC Certificate) →
         </Link>
       </div>
     </div>
