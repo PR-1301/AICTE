@@ -1,4 +1,4 @@
-import { mockDb } from './mockDb';
+import { mockDb } from './mockDb.js';
 
 const ARTIFICIAL_DELAY_MS = 300;
 

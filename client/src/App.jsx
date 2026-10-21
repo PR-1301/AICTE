@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
-import TemporaryDashboard from './pages/TemporaryDashboard';
+import Dashboard from './pages/Dashboard';
 import ApplicationReview from './pages/ApplicationReview';
 import EvidenceViewer from './pages/EvidenceViewer';
 import AuditTrail from './pages/AuditTrail';
@@ -17,11 +17,12 @@ export default function App() {
 
         {/* Officer portal routes (Section 13) */}
         <Route path="/officer" element={<Layout />}>
-          <Route path="dashboard" element={<TemporaryDashboard />} />
+          <Route index element={<Navigate to="dashboard" replace />} />
+          <Route path="dashboard" element={<Dashboard />} />
           <Route path="applications/:id" element={<ApplicationReview />} />
           <Route path="applications/:id/findings/:fid" element={<EvidenceViewer />} />
           <Route path="audit" element={<AuditTrail />} />
-          {/* Temporary inspection route for Step 3 visual check */}
+          {/* Inspection route for visual check */}
           <Route path="_components" element={<ComponentsShowcase />} />
         </Route>
 

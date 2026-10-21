@@ -205,5 +205,125 @@
         "bbox": { "x": 0.45, "y": 0.56, "w": 0.28, "h": 0.04 }
       }
     ]
+  },
+  {
+    "id": "F-301",
+    "applicationId": "APP-003",
+    "docId": "doc-vce-noc",
+    "rule": "DOCUMENT_VALIDITY_CHECK",
+    "status": "VERIFIED",
+    "severity": "low",
+    "confidence": 0.98,
+    "explanation": "Fire Safety NOC is valid through 15-12-2026. Document validity ends within 55 days of review anchor date.",
+    "evidence": [
+      {
+        "docId": "doc-vce-noc",
+        "docName": "Fire Safety NOC",
+        "field": "valid_upto",
+        "value": "15-12-2026",
+        "page": 1,
+        "bbox": { "x": 0.55, "y": 0.45, "w": 0.3, "h": 0.05 }
+      }
+    ]
+  },
+  {
+    "id": "F-302",
+    "applicationId": "APP-003",
+    "docId": "doc-vce-land",
+    "rule": "LAND_AREA_CONSISTENCY",
+    "status": "MISMATCH_DETECTED",
+    "severity": "high",
+    "confidence": 0.91,
+    "explanation": "Registered land title deed records 3.2 acres versus 3.5 acres specified in institutional expansion proposal.",
+    "evidence": [
+      {
+        "docId": "doc-vce-land",
+        "docName": "Land Title & Ownership Deed",
+        "field": "land_area",
+        "value": "3.2 acres",
+        "page": 1,
+        "bbox": { "x": 0.5, "y": 0.3, "w": 0.3, "h": 0.05 }
+      }
+    ]
+  },
+  {
+    "id": "F-401",
+    "applicationId": "APP-004",
+    "docId": "doc-npi-affidavit",
+    "rule": "INSTITUTE_NAME_MATCH",
+    "status": "VERIFIED",
+    "severity": "low",
+    "confidence": 1.0,
+    "explanation": "Institute name matches AICTE records and state technical education registry.",
+    "evidence": [
+      {
+        "docId": "doc-npi-affidavit",
+        "docName": "Affidavit for EoA & Land Details",
+        "field": "institute_name",
+        "value": "National Polytechnic Institute",
+        "page": 1,
+        "bbox": { "x": 0.2, "y": 0.2, "w": 0.5, "h": 0.05 }
+      }
+    ]
+  },
+  {
+    "id": "F-501",
+    "applicationId": "APP-005",
+    "docId": "doc-sim-noc",
+    "rule": "DOCUMENT_VALIDITY_CHECK",
+    "status": "EXPIRED",
+    "severity": "high",
+    "confidence": 0.99,
+    "explanation": "Fire Safety NOC lapsed on 30-08-2026. Extension of Approval requires valid certification.",
+    "evidence": [
+      {
+        "docId": "doc-sim-noc",
+        "docName": "Fire Safety NOC",
+        "field": "valid_upto",
+        "value": "30-08-2026",
+        "page": 1,
+        "bbox": { "x": 0.55, "y": 0.45, "w": 0.3, "h": 0.05 }
+      }
+    ]
+  },
+  {
+    "id": "F-601",
+    "applicationId": "APP-006",
+    "docId": "doc-kips-affidavit",
+    "rule": "MANDATORY_DOCUMENT_CHECK",
+    "status": "VERIFICATION_PENDING",
+    "severity": "low",
+    "confidence": 0.85,
+    "explanation": "Automated verification query queued with state technical board repository. Awaiting response.",
+    "evidence": [
+      {
+        "docId": "doc-kips-affidavit",
+        "docName": "Affidavit for EoA & Land Details",
+        "field": "verification_status",
+        "value": "PENDING_RESPONSE",
+        "page": 1,
+        "bbox": { "x": 0.2, "y": 0.2, "w": 0.4, "h": 0.05 }
+      }
+    ]
+  },
+  {
+    "id": "F-602",
+    "applicationId": "APP-006",
+    "docId": "doc-kips-land",
+    "rule": "LAND_RECORD_AUTHENTICATION",
+    "status": "SOURCE_UNAVAILABLE",
+    "severity": "medium",
+    "confidence": 0.70,
+    "explanation": "State revenue portal returned HTTP 503 during automated title verification. Requires manual scrutiny or retry.",
+    "evidence": [
+      {
+        "docId": "doc-kips-land",
+        "docName": "Land Title & Ownership Deed",
+        "field": "portal_status",
+        "value": "HTTP_503_GATEWAY_TIMEOUT",
+        "page": 1,
+        "bbox": { "x": 0.2, "y": 0.4, "w": 0.5, "h": 0.05 }
+      }
+    ]
   }
 ]

@@ -114,3 +114,7 @@ export const AUDIT_ACTION_LABELS = {
 export const DISCLAIMER_ADVISORY = 'AI findings are advisory. The decision rests with the officer.';
 export const DISCLAIMER_PRELIMINARY = 'Preliminary indicator. Human verification required.';
 export const DEMO_RIBBON_TEXT = 'Concept demo · synthetic data';
+
+// Fixed demo anchor date (All expiry/expiring soon calculations use DEMO_TODAY)
+export const DEMO_TODAY = '2026-10-21';
+

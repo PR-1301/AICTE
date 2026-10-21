@@ -1,5 +1,32 @@
 [
   {
+    "id": "AUD-063",
+    "applicationId": "APP-006",
+    "ts": "2026-10-18T16:10:00Z",
+    "actor": "system",
+    "action": "SOURCE_RESPONSE",
+    "detail": "State land registry portal returned 503 Service Unavailable during automated title search.",
+    "ref": "F-602"
+  },
+  {
+    "id": "AUD-062",
+    "applicationId": "APP-006",
+    "ts": "2026-10-18T16:05:00Z",
+    "actor": "system",
+    "action": "RECORD_CHECKED",
+    "detail": "Automated verification query queued with state technical board repository for affidavit.",
+    "ref": "F-601"
+  },
+  {
+    "id": "AUD-061",
+    "applicationId": "APP-006",
+    "ts": "2026-10-18T16:00:00Z",
+    "actor": "system",
+    "action": "APPLICATION_RECEIVED",
+    "detail": "Application received for Kalyani Institute of Pharmaceutical Sciences.",
+    "ref": "APP-006"
+  },
+  {
     "id": "AUD-029",
     "applicationId": "APP-002",
     "ts": "2026-10-14T09:05:00Z",
@@ -261,6 +288,51 @@
     "ref": "APP-001"
   },
   {
+    "id": "AUD-043",
+    "applicationId": "APP-004",
+    "ts": "2026-10-11T14:20:00Z",
+    "actor": "officer-01",
+    "action": "DECISION_SUBMITTED",
+    "detail": "Officer decision submitted: Approve. Remarks: All documents verified against issuing sources. Land and faculty requirements fully met.",
+    "ref": "APP-004"
+  },
+  {
+    "id": "AUD-033",
+    "applicationId": "APP-003",
+    "ts": "2026-10-10T14:35:00Z",
+    "actor": "system",
+    "action": "VALIDATION_COMPLETE",
+    "detail": "Automated validation complete for Vidyapeeth College of Engineering: 2 verified, 1 mismatch, 0 expired.",
+    "ref": "APP-003"
+  },
+  {
+    "id": "AUD-032",
+    "applicationId": "APP-003",
+    "ts": "2026-10-10T14:34:00Z",
+    "actor": "system",
+    "action": "RULE_APPLIED",
+    "detail": "LAND_AREA_CONSISTENCY v1.2 flagged discrepancy: 3.2 acres on deed vs 3.5 acres proposed.",
+    "ref": "F-302"
+  },
+  {
+    "id": "AUD-031",
+    "applicationId": "APP-003",
+    "ts": "2026-10-10T14:32:00Z",
+    "actor": "system",
+    "action": "APPLICATION_RECEIVED",
+    "detail": "Application bundle received for Vidyapeeth College of Engineering (EoA - New Course Addition).",
+    "ref": "APP-003"
+  },
+  {
+    "id": "AUD-053",
+    "applicationId": "APP-005",
+    "ts": "2026-10-09T11:05:00Z",
+    "actor": "officer-01",
+    "action": "DECISION_SUBMITTED",
+    "detail": "Officer decision submitted: Request more info. Remarks: Submitted Fire Safety NOC expired on 2026-08-30. Please upload an updated renewal receipt or NOC within 15 days.",
+    "ref": "APP-005"
+  },
+  {
     "id": "AUD-000",
     "applicationId": "APP-004",
     "ts": "2026-10-08T14:22:00Z",
@@ -268,5 +340,23 @@
     "action": "DECISION_SUBMITTED",
     "detail": "Officer decision submitted: Approve. Remarks: All statutory conditions verified with issuing authority.",
     "ref": "APP-004"
+  },
+  {
+    "id": "AUD-052",
+    "applicationId": "APP-005",
+    "ts": "2026-10-06T12:45:00Z",
+    "actor": "system",
+    "action": "ALERT_RAISED",
+    "detail": "DOCUMENT_VALIDITY_CHECK raised high-severity alert: Fire Safety NOC lapsed on 30-08-2026.",
+    "ref": "F-501"
+  },
+  {
+    "id": "AUD-051",
+    "applicationId": "APP-005",
+    "ts": "2026-10-06T12:00:00Z",
+    "actor": "system",
+    "action": "APPLICATION_RECEIVED",
+    "detail": "Application received for Saraswati Institute of Management.",
+    "ref": "APP-005"
   }
 ]

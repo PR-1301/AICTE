@@ -23,6 +23,7 @@
         "id": "doc-noc",
         "type": "Fire Safety NOC",
         "status": "EXPIRED",
+        "validUpto": "2026-06-30",
         "image": "/docs/noc.png",
         "required": true
       },
@@ -74,6 +75,7 @@
         "id": "doc-apex-noc",
         "type": "Fire Safety NOC",
         "status": "VERIFIED",
+        "validUpto": "2027-12-31",
         "image": "/docs/apex_noc.png",
         "required": true
       },
@@ -107,7 +109,7 @@
     "status": "UNDER_OFFICER_REVIEW",
     "submittedOn": "2026-10-10",
     "counts": {
-      "verified": 4,
+      "verified": 2,
       "mismatch": 1,
       "expired": 0,
       "manualReview": 0
@@ -117,21 +119,22 @@
         "id": "doc-vce-affidavit",
         "type": "Affidavit for EoA & Land Details",
         "status": "VERIFIED",
-        "image": "/docs/affidavit.png",
+        "image": null,
         "required": true
       },
       {
         "id": "doc-vce-noc",
         "type": "Fire Safety NOC",
         "status": "VERIFIED",
-        "image": "/docs/noc.png",
+        "validUpto": "2026-12-15",
+        "image": null,
         "required": true
       },
       {
         "id": "doc-vce-land",
         "type": "Land Title & Ownership Deed",
         "status": "MISMATCH_DETECTED",
-        "image": "/docs/land.png",
+        "image": null,
         "required": true
       }
     ]
@@ -143,17 +146,44 @@
     "status": "APPROVED",
     "submittedOn": "2026-10-08",
     "counts": {
-      "verified": 5,
+      "verified": 3,
       "mismatch": 0,
       "expired": 0,
       "manualReview": 0
+    },
+    "decision": {
+      "decision": "APPROVE",
+      "remarks": "All documents verified against issuing sources. Land and faculty requirements fully met.",
+      "officer": "officer-01",
+      "ts": "2026-10-11T14:20:00Z"
+    },
+    "lastDecision": {
+      "decision": "APPROVE",
+      "remarks": "All documents verified against issuing sources. Land and faculty requirements fully met.",
+      "officer": "officer-01",
+      "ts": "2026-10-11T14:20:00Z"
     },
     "documents": [
       {
         "id": "doc-npi-affidavit",
         "type": "Affidavit for EoA & Land Details",
         "status": "VERIFIED",
-        "image": "/docs/affidavit.png",
+        "image": null,
+        "required": true
+      },
+      {
+        "id": "doc-npi-noc",
+        "type": "Fire Safety NOC",
+        "status": "VERIFIED",
+        "validUpto": "2027-08-30",
+        "image": null,
+        "required": true
+      },
+      {
+        "id": "doc-npi-land",
+        "type": "Land Title & Ownership Deed",
+        "status": "VERIFIED",
+        "image": null,
         "required": true
       }
     ]
@@ -166,16 +196,43 @@
     "submittedOn": "2026-10-06",
     "counts": {
       "verified": 2,
-      "mismatch": 2,
+      "mismatch": 0,
       "expired": 1,
       "manualReview": 0
     },
+    "decision": {
+      "decision": "REQUEST_MORE_INFO",
+      "remarks": "Submitted Fire Safety NOC expired on 2026-08-30. Please upload an updated renewal receipt or NOC within 15 days.",
+      "officer": "officer-01",
+      "ts": "2026-10-09T11:05:00Z"
+    },
+    "lastDecision": {
+      "decision": "REQUEST_MORE_INFO",
+      "remarks": "Submitted Fire Safety NOC expired on 2026-08-30. Please upload an updated renewal receipt or NOC within 15 days.",
+      "officer": "officer-01",
+      "ts": "2026-10-09T11:05:00Z"
+    },
     "documents": [
+      {
+        "id": "doc-sim-affidavit",
+        "type": "Affidavit for EoA & Land Details",
+        "status": "VERIFIED",
+        "image": null,
+        "required": true
+      },
       {
         "id": "doc-sim-noc",
         "type": "Fire Safety NOC",
         "status": "EXPIRED",
-        "image": "/docs/noc.png",
+        "validUpto": "2026-08-30",
+        "image": null,
+        "required": true
+      },
+      {
+        "id": "doc-sim-land",
+        "type": "Land Title & Ownership Deed",
+        "status": "VERIFIED",
+        "image": null,
         "required": true
       }
     ]
@@ -185,19 +242,34 @@
     "institute": "Kalyani Institute of Pharmaceutical Sciences",
     "category": "Extension of Approval (EoA)",
     "status": "AI_VALIDATING",
-    "submittedOn": "2026-10-15",
+    "submittedOn": "2026-10-18",
     "counts": {
       "verified": 1,
       "mismatch": 0,
       "expired": 0,
-      "manualReview": 0
+      "manualReview": 2
     },
     "documents": [
       {
         "id": "doc-kips-affidavit",
         "type": "Affidavit for EoA & Land Details",
         "status": "VERIFICATION_PENDING",
-        "image": "/docs/affidavit.png",
+        "image": null,
+        "required": true
+      },
+      {
+        "id": "doc-kips-land",
+        "type": "Land Title & Ownership Deed",
+        "status": "SOURCE_UNAVAILABLE",
+        "image": null,
+        "required": true
+      },
+      {
+        "id": "doc-kips-noc",
+        "type": "Fire Safety NOC",
+        "status": "VERIFIED",
+        "validUpto": "2027-04-10",
+        "image": null,
         "required": true
       }
     ]

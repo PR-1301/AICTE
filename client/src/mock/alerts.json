@@ -2,11 +2,12 @@
   {
     "id": "ALT-001",
     "type": "DOCUMENT_EXPIRED",
-    "title": "Fire NOC Expired for Demo Institute of Technology",
+    "title": "Fire Safety NOC Expired",
     "applicationId": "APP-001",
     "institute": "Demo Institute of Technology",
     "severity": "high",
-    "message": "Fire safety certificate expired on 30-06-2026. Immediate renewal or clarification required.",
+    "message": "Fire Safety NOC expired on 30-06-2026. Extension of Approval requires active statutory validity.",
+    "link": "/officer/applications/APP-001/findings/F-002",
     "ts": "2026-10-12T10:13:15Z"
   },
   {
@@ -17,36 +18,62 @@
     "institute": "Demo Institute of Technology",
     "severity": "high",
     "message": "Affidavit claims 4.2 acres whereas registered title deed specifies 3.8 acres.",
+    "link": "/officer/applications/APP-001/findings/F-003",
     "ts": "2026-10-12T10:14:02Z"
   },
   {
     "id": "ALT-003",
-    "type": "MISSING_DOCUMENT",
+    "type": "MANUAL_REVIEW_REQUIRED",
     "title": "Mandatory NAAC/NBA Accreditation Absent",
     "applicationId": "APP-001",
     "institute": "Demo Institute of Technology",
     "severity": "high",
-    "message": "Required accreditation certificate not uploaded in application bundle.",
+    "message": "Mandatory accreditation certificate was not uploaded in application bundle. Officer verification required.",
+    "link": "/officer/applications/APP-001/findings/F-004",
     "ts": "2026-10-12T10:14:45Z"
   },
   {
     "id": "ALT-004",
-    "type": "PAYMENT_MISMATCH",
-    "title": "TER Processing Fee Shortfall (₹50,000)",
-    "applicationId": "APP-001",
-    "institute": "Demo Institute of Technology",
-    "severity": "medium",
-    "message": "Payment receipt ₹1,50,000 does not match required fee of ₹2,00,000.",
-    "ts": "2026-10-12T10:15:10Z"
+    "type": "UNRESOLVED_DISCREPANCY",
+    "title": "Land Title Deed Discrepancy",
+    "applicationId": "APP-003",
+    "institute": "Vidyapeeth College of Engineering",
+    "severity": "high",
+    "message": "Registered land title deed records 3.2 acres versus 3.5 acres specified in institutional expansion proposal.",
+    "link": "/officer/applications/APP-003/findings/F-302",
+    "ts": "2026-10-10T14:34:00Z"
   },
   {
     "id": "ALT-005",
-    "type": "PENDING_VERIFICATION",
-    "title": "3 Documents Pending Source Verification",
+    "type": "EXPIRING_SOON",
+    "title": "Fire Safety NOC Expiring Soon",
+    "applicationId": "APP-003",
+    "institute": "Vidyapeeth College of Engineering",
+    "severity": "medium",
+    "message": "Fire Safety NOC validity ends on 2026-12-15 (expires within 55 days of review anchor date).",
+    "link": "/officer/applications/APP-003",
+    "ts": "2026-10-10T14:35:00Z"
+  },
+  {
+    "id": "ALT-006",
+    "type": "SOURCE_UNAVAILABLE",
+    "title": "Land Registry Source Unavailable",
+    "applicationId": "APP-006",
+    "institute": "Kalyani Institute of Pharmaceutical Sciences",
+    "severity": "medium",
+    "message": "State revenue portal returned HTTP 503 during automated title verification. Requires manual scrutiny.",
+    "link": "/officer/applications/APP-006",
+    "ts": "2026-10-18T16:10:00Z"
+  },
+  {
+    "id": "ALT-007",
+    "type": "VERIFICATION_PENDING",
+    "title": "Affidavit Verification Pending",
     "applicationId": "APP-006",
     "institute": "Kalyani Institute of Pharmaceutical Sciences",
     "severity": "low",
-    "message": "Automated verification queries queued with affiliating university registrar.",
-    "ts": "2026-10-15T09:30:00Z"
+    "message": "Automated verification query queued with state technical board repository. Awaiting response.",
+    "link": "/officer/applications/APP-006",
+    "ts": "2026-10-18T16:05:00Z"
   }
 ]
