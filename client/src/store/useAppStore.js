@@ -1,9 +1,9 @@
 import { create } from 'zustand';
-import { AUDIT_ACTOR } from '../constants';
+import { ROLE } from '../constants';
 
 export const useAppStore = create((set) => ({
-  // Current user/officer role
-  currentRole: AUDIT_ACTOR.OFFICER,
+  // Current portal role (set from Login screen)
+  currentRole: null,
   setRole: (role) => set({ currentRole: role }),
 
   // Global filters
@@ -17,6 +17,9 @@ export const useAppStore = create((set) => ({
   setSelectedAppId: (id) => set({ selectedAppId: id }),
   selectedFindingId: null,
   setSelectedFindingId: (fid) => set({ selectedFindingId: fid }),
+
+  // Logout — clears role, returns to login
+  logout: () => set({ currentRole: null }),
 
   // Reset store back to clean seed defaults
   resetStore: () =>

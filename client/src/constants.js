@@ -118,3 +118,16 @@ export const DEMO_RIBBON_TEXT = 'Concept demo · synthetic data';
 // Fixed demo anchor date (All expiry/expiring soon calculations use DEMO_TODAY)
 export const DEMO_TODAY = '2026-10-21';
 
+// Portal roles (Multi-portal repo conventions, AGENTS.md Section 13)
+export const ROLE = {
+  OFFICER: 'officer',
+  COLLEGE: 'college',
+  ADMIN: 'admin',
+};
+
+export const ROLE_LABELS = {
+  [ROLE.OFFICER]: 'Scrutiny Officer',
+  [ROLE.COLLEGE]: 'College Applicant',
+  [ROLE.ADMIN]: 'Admin',
+};
+

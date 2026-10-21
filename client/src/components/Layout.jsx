@@ -6,6 +6,8 @@ import { resetDemo } from '../api';
 import { useAppStore } from '../store/useAppStore';
 import { AUDIT_ACTOR, DISCLAIMER_ADVISORY } from '../constants';
 
+// Logout action for Switch Portal
+
 const isDevToolsEnabled = import.meta.env.VITE_DEV_TOOLS === 'true';
 
 export default function Layout() {
@@ -15,6 +17,12 @@ export default function Layout() {
   const location = useLocation();
   const navigate = useNavigate();
   const resetStore = useAppStore((state) => state.resetStore);
+  const logout = useAppStore((state) => state.logout);
+
+  const handleSwitchPortal = () => {
+    logout();
+    navigate('/');
+  };
 
   // Keyboard shortcut: Alt+Shift+D (replaces conflicting shortcuts)
   useEffect(() => {
@@ -148,6 +156,18 @@ export default function Layout() {
                 <span>{resetMessage}</span>
               </span>
             )}
+
+            {/* Switch Portal Button */}
+            <button
+              type="button"
+              onClick={handleSwitchPortal}
+              className="text-xs sm:text-sm px-3 py-1.5 rounded-lg bg-slate-700/80 hover:bg-slate-700 text-slate-100 hover:text-white border border-slate-500 transition-colors flex items-center space-x-1.5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#1F6FEB]"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+              </svg>
+              <span className="font-medium hidden sm:inline">Switch Portal</span>
+            </button>
 
             {/* Reset Demo Button */}
             <button
