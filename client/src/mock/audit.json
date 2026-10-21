@@ -1,65 +1,272 @@
 [
   {
-    "id": "AUD-001",
-    "applicationId": "APP-001",
-    "ts": "2026-10-12T10:12:00Z",
+    "id": "AUD-029",
+    "applicationId": "APP-002",
+    "ts": "2026-10-14T09:05:00Z",
+    "actor": "system",
+    "action": "VALIDATION_COMPLETE",
+    "detail": "Automated validation complete for Apex Institute of Engineering & Technology: 5 verified, 0 mismatch, 0 expired. All statutory norms fulfilled.",
+    "ref": "APP-002"
+  },
+  {
+    "id": "AUD-028",
+    "applicationId": "APP-002",
+    "ts": "2026-10-14T09:04:45Z",
     "actor": "system",
     "action": "RULE_APPLIED",
-    "detail": "INSTITUTE_NAME_MATCH v2.1 executed on doc-affidavit and doc-noc. Fuzzy score 0.94 within threshold.",
-    "ref": "F-001"
+    "detail": "TER_FEE_RECONCILIATION v1.0 verified TER fee payment ₹1,00,000 matches AICTE fee schedule.",
+    "ref": "F-105"
   },
   {
-    "id": "AUD-002",
-    "applicationId": "APP-001",
-    "ts": "2026-10-12T10:12:30Z",
+    "id": "AUD-027",
+    "applicationId": "APP-002",
+    "ts": "2026-10-14T09:04:30Z",
     "actor": "system",
     "action": "RECORD_CHECKED",
-    "detail": "State Fire Services Portal registry query for NOC #FS-2024-9982. Expiry date confirmed 30-06-2026.",
-    "ref": "F-002"
+    "detail": "Payment gateway bank reconciliation query for UTR AICTE-PAY-2026-APX-77192-SBI.",
+    "ref": "F-105"
   },
   {
-    "id": "AUD-003",
+    "id": "AUD-026",
+    "applicationId": "APP-002",
+    "ts": "2026-10-14T09:04:00Z",
+    "actor": "system",
+    "action": "RULE_APPLIED",
+    "detail": "MANDATORY_DOCUMENT_CHECK v3.0 verified all 5 required statutory documents present and authenticated.",
+    "ref": "F-104"
+  },
+  {
+    "id": "AUD-025",
+    "applicationId": "APP-002",
+    "ts": "2026-10-14T09:03:45Z",
+    "actor": "system",
+    "action": "SOURCE_RESPONSE",
+    "detail": "NAAC accreditation portal confirmed VERIFIED: Grade 'A+' (CGPA 3.58) valid through 14-09-2028.",
+    "ref": "F-104"
+  },
+  {
+    "id": "AUD-024",
+    "applicationId": "APP-002",
+    "ts": "2026-10-14T09:03:30Z",
+    "actor": "system",
+    "action": "RECORD_CHECKED",
+    "detail": "Queried National Assessment and Accreditation Council (NAAC) database for Standing Committee certificate #NAAC/A&A/2023/AIET-9942.",
+    "ref": "F-104"
+  },
+  {
+    "id": "AUD-023",
+    "applicationId": "APP-002",
+    "ts": "2026-10-14T09:03:00Z",
+    "actor": "system",
+    "action": "RULE_APPLIED",
+    "detail": "LAND_AREA_CONSISTENCY v1.2 verified 5.0 acres matching between Affidavit and registered Title Deed.",
+    "ref": "F-103"
+  },
+  {
+    "id": "AUD-022",
+    "applicationId": "APP-002",
+    "ts": "2026-10-14T09:02:25Z",
+    "actor": "system",
+    "action": "RULE_APPLIED",
+    "detail": "DOCUMENT_VALIDITY_CHECK v2.0 verified Fire Safety clearance active through 31-12-2027.",
+    "ref": "F-102"
+  },
+  {
+    "id": "AUD-021",
+    "applicationId": "APP-002",
+    "ts": "2026-10-14T09:02:15Z",
+    "actor": "system",
+    "action": "SOURCE_RESPONSE",
+    "detail": "State Fire Services Portal registry query for NOC #FS-2025-4102 returned VERIFIED with active status.",
+    "ref": "F-102"
+  },
+  {
+    "id": "AUD-020",
+    "applicationId": "APP-002",
+    "ts": "2026-10-14T09:02:00Z",
+    "actor": "system",
+    "action": "RECORD_CHECKED",
+    "detail": "Automated query dispatched to Chief Fire Officer compliance database.",
+    "ref": "F-102"
+  },
+  {
+    "id": "AUD-019",
+    "applicationId": "APP-002",
+    "ts": "2026-10-14T09:01:30Z",
+    "actor": "system",
+    "action": "RULE_APPLIED",
+    "detail": "INSTITUTE_NAME_MATCH v2.1 verified exact institutional name match across all filings.",
+    "ref": "F-101"
+  },
+  {
+    "id": "AUD-018",
+    "applicationId": "APP-002",
+    "ts": "2026-10-14T09:01:00Z",
+    "actor": "system",
+    "action": "FIELDS_EXTRACTED",
+    "detail": "OCR extracted 42 statutory fields across 5 documents with average confidence 0.99.",
+    "ref": "APP-002"
+  },
+  {
+    "id": "AUD-017",
+    "applicationId": "APP-002",
+    "ts": "2026-10-14T09:00:30Z",
+    "actor": "system",
+    "action": "DOCUMENTS_CLASSIFIED",
+    "detail": "Classified 5 uploaded documents: Affidavit, Fire NOC, Land Title Deed, NAAC Certificate, TER Receipt.",
+    "ref": "APP-002"
+  },
+  {
+    "id": "AUD-016",
+    "applicationId": "APP-002",
+    "ts": "2026-10-14T09:00:00Z",
+    "actor": "system",
+    "action": "APPLICATION_RECEIVED",
+    "detail": "Application bundle received for Apex Institute of Engineering & Technology (Category: Extension of Approval).",
+    "ref": "APP-002"
+  },
+  {
+    "id": "AUD-015",
+    "applicationId": "APP-001",
+    "ts": "2026-10-12T10:15:35Z",
+    "actor": "system",
+    "action": "VALIDATION_COMPLETE",
+    "detail": "Automated validation complete for Demo Institute of Technology: 1 verified, 2 mismatch, 1 expired, 1 manual review required. Advisory report compiled for officer review.",
+    "ref": "APP-001"
+  },
+  {
+    "id": "AUD-014",
+    "applicationId": "APP-001",
+    "ts": "2026-10-12T10:15:20Z",
+    "actor": "system",
+    "action": "RULE_APPLIED",
+    "detail": "TER_FEE_RECONCILIATION v1.0 detected fee shortfall: Receipt specifies ₹1,50,000 paid vs prescribed ₹2,00,000.",
+    "ref": "F-005"
+  },
+  {
+    "id": "AUD-013",
+    "applicationId": "APP-001",
+    "ts": "2026-10-12T10:15:10Z",
+    "actor": "system",
+    "action": "RECORD_CHECKED",
+    "detail": "Reconciled payment UTR AICTE-PAY-88391024-HDFC against central AICTE fee ledger schedule.",
+    "ref": "F-005"
+  },
+  {
+    "id": "AUD-012",
+    "applicationId": "APP-001",
+    "ts": "2026-10-12T10:14:50Z",
+    "actor": "system",
+    "action": "ALERT_RAISED",
+    "detail": "MANDATORY_DOCUMENT_CHECK raised high-severity alert: Mandatory NAAC / NBA Accreditation Certificate not submitted.",
+    "ref": "F-004"
+  },
+  {
+    "id": "AUD-011",
+    "applicationId": "APP-001",
+    "ts": "2026-10-12T10:14:45Z",
+    "actor": "system",
+    "action": "RULE_APPLIED",
+    "detail": "MANDATORY_DOCUMENT_CHECK v3.0 identified missing accreditation certificate required for intake expansion category.",
+    "ref": "F-004"
+  },
+  {
+    "id": "AUD-010",
+    "applicationId": "APP-001",
+    "ts": "2026-10-12T10:14:02Z",
+    "actor": "system",
+    "action": "RULE_APPLIED",
+    "detail": "LAND_AREA_CONSISTENCY v1.2 detected discrepancy: Affidavit (4.2 acres) differs from registered Land Deed (3.8 acres).",
+    "ref": "F-003"
+  },
+  {
+    "id": "AUD-009",
+    "applicationId": "APP-001",
+    "ts": "2026-10-12T10:13:50Z",
+    "actor": "system",
+    "action": "SOURCE_RESPONSE",
+    "detail": "State Revenue Land Portal query for Khasra No. 142/B returned SOURCE_UNAVAILABLE (gateway timeout 504). Human verification required.",
+    "ref": "F-003"
+  },
+  {
+    "id": "AUD-008",
+    "applicationId": "APP-001",
+    "ts": "2026-10-12T10:13:45Z",
+    "actor": "system",
+    "action": "RECORD_CHECKED",
+    "detail": "Automated query dispatched to Department of Revenue & Land Reforms Registry.",
+    "ref": "F-003"
+  },
+  {
+    "id": "AUD-007",
     "applicationId": "APP-001",
     "ts": "2026-10-12T10:13:15Z",
     "actor": "system",
     "action": "ALERT_RAISED",
-    "detail": "DOCUMENT_VALIDITY_CHECK flagged Fire Safety NOC as EXPIRED.",
+    "detail": "DOCUMENT_VALIDITY_CHECK raised high-severity alert: Fire Safety Certificate lapsed on 30-06-2026.",
+    "ref": "F-002"
+  },
+  {
+    "id": "AUD-006",
+    "applicationId": "APP-001",
+    "ts": "2026-10-12T10:13:00Z",
+    "actor": "system",
+    "action": "SOURCE_RESPONSE",
+    "detail": "Directorate of Fire & Emergency Services confirmed NOC record #FS-2024-9982 expired on 30-06-2026.",
+    "ref": "F-002"
+  },
+  {
+    "id": "AUD-005",
+    "applicationId": "APP-001",
+    "ts": "2026-10-12T10:12:30Z",
+    "actor": "system",
+    "action": "RECORD_CHECKED",
+    "detail": "Queried State Fire Services Portal registry for NOC #FS-2024-9982.",
     "ref": "F-002"
   },
   {
     "id": "AUD-004",
     "applicationId": "APP-001",
-    "ts": "2026-10-12T10:14:02Z",
+    "ts": "2026-10-12T10:12:00Z",
     "actor": "system",
     "action": "RULE_APPLIED",
-    "detail": "LAND_AREA_CONSISTENCY v1.2 detected discrepancy: Affidavit (4.2 acres) vs Deed (3.8 acres).",
-    "ref": "F-003"
+    "detail": "INSTITUTE_NAME_MATCH v2.1 evaluated. Fuzzy similarity 0.94 ('Demo Inst. of Tech.' vs 'Demo Institute of Technology') within threshold. Passed.",
+    "ref": "F-001"
   },
   {
-    "id": "AUD-005",
+    "id": "AUD-003",
     "applicationId": "APP-001",
-    "ts": "2026-10-12T10:14:45Z",
+    "ts": "2026-10-12T10:11:30Z",
     "actor": "system",
-    "action": "RULE_APPLIED",
-    "detail": "MANDATORY_DOCUMENT_CHECK identified missing NAAC/NBA certificate for intake expansion.",
-    "ref": "F-004"
+    "action": "FIELDS_EXTRACTED",
+    "detail": "OCR pipeline extracted 38 institutional fields across 4 documents with average confidence 0.96.",
+    "ref": "APP-001"
   },
   {
-    "id": "AUD-006",
+    "id": "AUD-002",
     "applicationId": "APP-001",
-    "ts": "2026-10-12T10:15:10Z",
+    "ts": "2026-10-12T10:10:45Z",
     "actor": "system",
-    "action": "SOURCE_RESPONSE",
-    "detail": "Payment gateway reconciliation response: payment mismatch (Paid: ₹1,50,000, Expected: ₹2,00,000).",
-    "ref": "F-005"
+    "action": "DOCUMENTS_CLASSIFIED",
+    "detail": "Classified 4 uploaded documents: Affidavit, Fire NOC, Land Title Deed, TER Receipt. NAAC Certificate omitted.",
+    "ref": "APP-001"
   },
   {
-    "id": "AUD-007",
+    "id": "AUD-001",
+    "applicationId": "APP-001",
+    "ts": "2026-10-12T10:10:00Z",
+    "actor": "system",
+    "action": "APPLICATION_RECEIVED",
+    "detail": "Application bundle received for Demo Institute of Technology (Category: EoA - Intake Increase).",
+    "ref": "APP-001"
+  },
+  {
+    "id": "AUD-000",
     "applicationId": "APP-004",
-    "ts": "2026-10-10T14:22:00Z",
+    "ts": "2026-10-08T14:22:00Z",
     "actor": "officer-01",
     "action": "DECISION_SUBMITTED",
-    "detail": "Application approved. All statutory conditions verified with issuing authority.",
+    "detail": "Officer decision submitted: Approve. Remarks: All statutory conditions verified with issuing authority.",
     "ref": "APP-004"
   }
 ]

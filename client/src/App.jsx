@@ -4,7 +4,7 @@ import Layout from './components/Layout';
 import TemporaryDashboard from './pages/TemporaryDashboard';
 import ApplicationReview from './pages/ApplicationReview';
 import EvidenceViewer from './pages/EvidenceViewer';
-import AuditTrailPlaceholder from './pages/AuditTrailPlaceholder';
+import AuditTrail from './pages/AuditTrail';
 import ComponentsShowcase from './pages/ComponentsShowcase';
 
 export default function App() {
@@ -20,7 +20,7 @@ export default function App() {
           <Route path="dashboard" element={<TemporaryDashboard />} />
           <Route path="applications/:id" element={<ApplicationReview />} />
           <Route path="applications/:id/findings/:fid" element={<EvidenceViewer />} />
-          <Route path="audit" element={<AuditTrailPlaceholder />} />
+          <Route path="audit" element={<AuditTrail />} />
           {/* Temporary inspection route for Step 3 visual check */}
           <Route path="_components" element={<ComponentsShowcase />} />
         </Route>

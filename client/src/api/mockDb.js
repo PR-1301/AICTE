@@ -2,7 +2,12 @@ import initialApplications from '../mock/applications.json';
 import initialFindings from '../mock/findings.json';
 import initialAudit from '../mock/audit.json';
 import initialAlerts from '../mock/alerts.json';
-import { APPLICATION_STATUS, AUDIT_ACTION, AUDIT_ACTOR, DECISION_TYPE } from '../constants';
+import {
+  AUDIT_ACTION,
+  AUDIT_ACTOR,
+  DECISION_TO_APPLICATION_STATUS,
+  APPLICATION_STATUS,
+} from '../constants';
 
 // Deep clone helper
 const clone = (data) => JSON.parse(JSON.stringify(data));
@@ -31,57 +36,87 @@ export const mockDb = {
   },
 
   getAuditEvents: (appId) => {
-    if (appId) {
-      return clone(auditTrail.filter((e) => e.applicationId === appId));
-    }
-    return clone(auditTrail);
+    const list = appId
+      ? auditTrail.filter((e) => e.applicationId === appId)
+      : auditTrail;
+    return clone(
+      [...list].sort((a, b) => new Date(b.ts).getTime() - new Date(a.ts).getTime())
+    );
   },
 
   getAlerts: () => clone(alerts),
 
-  submitDecision: (appId, { decision, remarks, officer = AUDIT_ACTOR.OFFICER }) => {
+  /**
+   * Submit officer decision. Supports both:
+   * submitDecision(appId, decision, remarks, officerId)
+   * and submitDecision(appId, { decision, remarks, officer })
+   */
+  submitDecision: (appId, decisionArg, remarksArg, officerIdArg) => {
     const appIndex = applications.findIndex((a) => a.id === appId);
     if (appIndex === -1) {
       throw new Error(`Application with id ${appId} not found`);
     }
 
-    // Determine target terminal status based on officer decision
-    let newStatus = APPLICATION_STATUS.UNDER_OFFICER_REVIEW;
-    if (decision === DECISION_TYPE.APPROVE) {
-      newStatus = APPLICATION_STATUS.APPROVED;
-    } else if (decision === DECISION_TYPE.REQUEST_MORE_INFO) {
-      newStatus = APPLICATION_STATUS.INFO_REQUESTED;
-    } else if (decision === DECISION_TYPE.SEND_FOR_INSPECTION) {
-      newStatus = APPLICATION_STATUS.SENT_FOR_INSPECTION;
+    let decision, remarks, officerId;
+    if (typeof decisionArg === 'object' && decisionArg !== null) {
+      decision = decisionArg.decision;
+      remarks = decisionArg.remarks;
+      officerId = decisionArg.officer || decisionArg.officerId || AUDIT_ACTOR.OFFICER;
+    } else {
+      decision = decisionArg;
+      remarks = remarksArg;
+      officerId = officerIdArg || AUDIT_ACTOR.OFFICER;
     }
+
+    // Determine target terminal status based on mapping in constants.js
+    const newStatus =
+      DECISION_TO_APPLICATION_STATUS[decision] || APPLICATION_STATUS.UNDER_OFFICER_REVIEW;
+
+    const timestamp = new Date().toISOString();
+
+    const decisionRecord = {
+      decision,
+      remarks,
+      officer: officerId,
+      ts: timestamp,
+    };
 
     // Mutate application in memory
     applications[appIndex] = {
       ...applications[appIndex],
       status: newStatus,
-      lastDecision: {
-        decision,
-        remarks,
-        officer,
-        ts: new Date().toISOString(),
-      },
+      decision: decisionRecord,
+      lastDecision: decisionRecord,
     };
 
-    // Append to audit trail
-    const auditRecord = {
-      id: `AUD-${Date.now()}`,
+    // 1. Append DECISION_SUBMITTED audit event
+    const decisionEvent = {
+      id: `AUD-${Date.now()}-1`,
       applicationId: appId,
-      ts: new Date().toISOString(),
-      actor: officer,
+      ts: timestamp,
+      actor: officerId,
       action: AUDIT_ACTION.DECISION_SUBMITTED,
-      detail: `Officer submitted decision: ${decision}. Remarks: ${remarks}`,
+      detail: `Officer decision submitted: ${decision}. Remarks: ${remarks}`,
       ref: appId,
     };
-    auditTrail.unshift(auditRecord);
+
+    // 2. Append status-change audit event
+    const statusEvent = {
+      id: `AUD-${Date.now()}-2`,
+      applicationId: appId,
+      ts: new Date(Date.now() + 50).toISOString(),
+      actor: officerId,
+      action: 'APPLICATION_STATUS_UPDATED',
+      detail: `Application status transitioned to ${newStatus}`,
+      ref: appId,
+    };
+
+    auditTrail.unshift(statusEvent);
+    auditTrail.unshift(decisionEvent);
 
     return {
       application: clone(applications[appIndex]),
-      auditEvent: clone(auditRecord),
+      auditEvents: [decisionEvent, statusEvent],
     };
   },
 

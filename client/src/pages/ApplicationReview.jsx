@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getApplication, getFindings } from '../api';
+import { getApplication, getFindings, getAudit } from '../api';
 import StatusBadge from '../components/StatusBadge';
 import SeverityTag from '../components/SeverityTag';
-import DecisionPanelPlaceholder from '../components/DecisionPanelPlaceholder';
+import DecisionPanel from '../portals/officer/components/DecisionPanel';
+import AuditTimeline from '../portals/officer/components/AuditTimeline';
 import { FINDING_STATUS, SEVERITY } from '../constants';
 
 /**
@@ -30,49 +31,52 @@ function sortByUrgency(a, b) {
  * Application Review Page (Route: /officer/applications/:id).
  * Loads strictly through src/api.
  * Dynamically calculates counts from documents & findings (does not read stored counts).
+ * Includes Scrutiny & Findings tab and dedicated scoped Audit Trail tab.
  */
 export default function ApplicationReview() {
   const { id: appId } = useParams();
 
   const [application, setApplication] = useState(null);
   const [findings, setFindings] = useState([]);
+  const [auditEvents, setAuditEvents] = useState([]);
+  const [activeTab, setActiveTab] = useState('review'); // 'review' | 'audit'
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    let isMounted = true;
+  const loadData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
 
-    async function loadData() {
-      try {
-        setLoading(true);
-        setError(null);
+      const [appData, findingsData, auditData] = await Promise.all([
+        getApplication(appId),
+        getFindings(appId),
+        getAudit(appId),
+      ]);
 
-        const [appData, findingsData] = await Promise.all([
-          getApplication(appId),
-          getFindings(appId),
-        ]);
-
-        if (!isMounted) return;
-
-        if (!appData) {
-          setError(`Application ${appId} was not found in the scrutiny database.`);
-          return;
-        }
-
-        setApplication(appData);
-        setFindings(findingsData || []);
-      } catch (err) {
-        console.error('Failed to load application review:', err);
-        if (isMounted) setError('Unable to load application details.');
-      } finally {
-        if (isMounted) setLoading(false);
+      if (!appData) {
+        setError(`Application ${appId} was not found in the scrutiny database.`);
+        return;
       }
-    }
 
+      setApplication(appData);
+      setFindings(findingsData || []);
+      setAuditEvents(auditData || []);
+    } catch (err) {
+      console.error('Failed to load application review:', err);
+      setError('Unable to load application details.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     loadData();
 
+    const handleReset = () => loadData();
+    window.addEventListener('aicte:reset-demo', handleReset);
     return () => {
-      isMounted = false;
+      window.removeEventListener('aicte:reset-demo', handleReset);
     };
   }, [appId]);
 
@@ -315,203 +319,266 @@ export default function ApplicationReview() {
         )}
       </div>
 
-      {/* 1. Required Document Checklist */}
-      <section className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
-        <div className="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-          <div>
-            <h2 className="text-base font-bold text-slate-800 tracking-tight">
-              Required Documents Checklist
-            </h2>
-            <p className="text-xs text-slate-500">
-              Mandatory statutory filings (sorted by scrutiny urgency)
-            </p>
-          </div>
-          <span className="text-xs font-mono text-slate-400">
-            {documentRows.length} Documents
+      {/* Navigation Tabs: Scrutiny Findings vs Audit Trail */}
+      <div className="flex border-b border-slate-200 space-x-2">
+        <button
+          type="button"
+          onClick={() => setActiveTab('review')}
+          className={`py-2.5 px-4 text-sm font-semibold border-b-2 transition-colors cursor-pointer flex items-center space-x-2 ${
+            activeTab === 'review'
+              ? 'border-[#0F2A4A] text-[#0F2A4A]'
+              : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'
+          }`}
+        >
+          <span>Scrutiny & Findings</span>
+          <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 font-mono">
+            {documentRows.length + crossDocFindings.length}
           </span>
-        </div>
+        </button>
 
-        <div className="divide-y divide-slate-200">
-          {documentRows.map((doc) => {
-            const hasFinding = doc.docSpecificFindings.length > 0;
-            const primaryFinding = doc.docSpecificFindings[0];
+        <button
+          type="button"
+          onClick={() => setActiveTab('audit')}
+          className={`py-2.5 px-4 text-sm font-semibold border-b-2 transition-colors cursor-pointer flex items-center space-x-2 ${
+            activeTab === 'audit'
+              ? 'border-[#0F2A4A] text-[#0F2A4A]'
+              : 'border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300'
+          }`}
+        >
+          <span>Application Audit Trail</span>
+          <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 font-mono">
+            {auditEvents.length}
+          </span>
+        </button>
+      </div>
 
-            return (
-              <div
-                key={doc.id}
-                className={`p-5 transition-colors ${
-                  doc.notSubmitted
-                    ? 'bg-purple-50/30'
-                    : hasFinding && doc.effectiveStatus === FINDING_STATUS.EXPIRED
-                    ? 'bg-rose-50/30'
-                    : 'hover:bg-slate-50/50'
-                }`}
-              >
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                  <div className="flex items-start space-x-3">
-                    <div className="mt-0.5">
-                      {doc.notSubmitted ? (
-                        <div className="w-6 h-6 rounded bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-xs">
-                          !
+      {activeTab === 'review' ? (
+        <>
+          {/* 1. Required Document Checklist */}
+          <section className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
+            <div className="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+              <div>
+                <h2 className="text-base font-bold text-slate-800 tracking-tight">
+                  Required Documents Checklist
+                </h2>
+                <p className="text-xs text-slate-500">
+                  Mandatory statutory filings (sorted by scrutiny urgency)
+                </p>
+              </div>
+              <span className="text-xs font-mono text-slate-400">
+                {documentRows.length} Documents
+              </span>
+            </div>
+
+            <div className="divide-y divide-slate-200">
+              {documentRows.map((doc) => {
+                const hasFinding = doc.docSpecificFindings.length > 0;
+                const primaryFinding = doc.docSpecificFindings[0];
+
+                return (
+                  <div
+                    key={doc.id}
+                    className={`p-5 transition-colors ${
+                      doc.notSubmitted
+                        ? 'bg-purple-50/30'
+                        : hasFinding && doc.effectiveStatus === FINDING_STATUS.EXPIRED
+                        ? 'bg-rose-50/30'
+                        : 'hover:bg-slate-50/50'
+                    }`}
+                  >
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                      <div className="flex items-start space-x-3">
+                        <div className="mt-0.5">
+                          {doc.notSubmitted ? (
+                            <div className="w-6 h-6 rounded bg-rose-100 text-rose-700 flex items-center justify-center font-bold text-xs">
+                              !
+                            </div>
+                          ) : (
+                            <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                            </svg>
+                          )}
                         </div>
-                      ) : (
-                        <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                        </svg>
-                      )}
-                    </div>
 
-                    <div>
-                      <div className="flex items-center space-x-2">
-                        <h3 className="text-sm font-semibold text-slate-800">
-                          {doc.type}
-                        </h3>
-                        {doc.required && (
-                          <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
-                            Mandatory
-                          </span>
+                        <div>
+                          <div className="flex items-center space-x-2">
+                            <h3 className="text-sm font-semibold text-slate-800">
+                              {doc.type}
+                            </h3>
+                            {doc.required && (
+                              <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+                                Mandatory
+                              </span>
+                            )}
+                          </div>
+
+                          {doc.notSubmitted ? (
+                            <p className="text-xs text-rose-700 font-medium mt-0.5">
+                              Not submitted &mdash; Statutory document omitted by applicant
+                            </p>
+                          ) : (
+                            <p className="text-xs text-slate-500 mt-0.5 font-mono">
+                              Document ID: {doc.id}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center space-x-3 self-start sm:self-auto">
+                        <StatusBadge status={doc.effectiveStatus} size="sm" />
+
+                        {/* Link to Evidence Viewer if document has findings or is missing */}
+                        {(primaryFinding || doc.notSubmitted) && (
+                          <Link
+                            to={`/officer/applications/${appId}/findings/${primaryFinding?.id || 'F-004'}`}
+                            className="text-xs font-semibold px-2.5 py-1 rounded bg-[#0F2A4A] text-white hover:bg-[#1F6FEB] transition-colors whitespace-nowrap"
+                          >
+                            Inspect Evidence &rarr;
+                          </Link>
                         )}
                       </div>
-
-                      {doc.notSubmitted ? (
-                        <p className="text-xs text-rose-700 font-medium mt-0.5">
-                          Not submitted &mdash; Statutory document omitted by applicant
-                        </p>
-                      ) : (
-                        <p className="text-xs text-slate-500 mt-0.5 font-mono">
-                          Document ID: {doc.id}
-                        </p>
-                      )}
                     </div>
-                  </div>
 
-                  <div className="flex items-center space-x-3 self-start sm:self-auto">
-                    <StatusBadge status={doc.effectiveStatus} size="sm" />
-
-                    {/* Link to Evidence Viewer if document has findings or is missing */}
-                    {(primaryFinding || doc.notSubmitted) && (
-                      <Link
-                        to={`/officer/applications/${appId}/findings/${primaryFinding?.id || 'F-004'}`}
-                        className="text-xs font-semibold px-2.5 py-1 rounded bg-[#0F2A4A] text-white hover:bg-[#1F6FEB] transition-colors whitespace-nowrap"
-                      >
-                        Inspect Evidence &rarr;
-                      </Link>
+                    {/* Sub-row for document-specific findings (e.g. Expired Fire NOC) */}
+                    {hasFinding && (
+                      <div className="mt-3 pl-8">
+                        {doc.docSpecificFindings.map((f) => (
+                          <div
+                            key={f.id}
+                            className="p-3 bg-white rounded border border-rose-200/80 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+                          >
+                            <div className="space-y-0.5">
+                              <div className="flex items-center space-x-2">
+                                <span className="text-xs font-mono font-bold text-slate-700">
+                                  {f.rule}
+                                </span>
+                                <SeverityTag severity={f.severity} size="sm" />
+                              </div>
+                              <p className="text-xs text-slate-600">
+                                {f.explanation}
+                              </p>
+                            </div>
+                            <Link
+                              to={`/officer/applications/${appId}/findings/${f.id}`}
+                              className="text-xs text-[#1F6FEB] hover:underline font-semibold shrink-0"
+                            >
+                              View highlighted box &rarr;
+                            </Link>
+                          </div>
+                        ))}
+                      </div>
                     )}
                   </div>
-                </div>
-
-                {/* Sub-row for document-specific findings (e.g. Expired Fire NOC) */}
-                {hasFinding && (
-                  <div className="mt-3 pl-8">
-                    {doc.docSpecificFindings.map((f) => (
-                      <div
-                        key={f.id}
-                        className="p-3 bg-white rounded border border-rose-200/80 shadow-2xs flex flex-col sm:flex-row sm:items-center justify-between gap-2"
-                      >
-                        <div className="space-y-0.5">
-                          <div className="flex items-center space-x-2">
-                            <span className="text-xs font-mono font-bold text-slate-700">
-                              {f.rule}
-                            </span>
-                            <SeverityTag severity={f.severity} size="sm" />
-                          </div>
-                          <p className="text-xs text-slate-600">
-                            {f.explanation}
-                          </p>
-                        </div>
-                        <Link
-                          to={`/officer/applications/${appId}/findings/${f.id}`}
-                          className="text-xs text-[#1F6FEB] hover:underline font-semibold shrink-0"
-                        >
-                          View highlighted box &rarr;
-                        </Link>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* 2. Cross-Document and Record Checks */}
-      <section className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
-        <div className="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-          <div>
-            <h2 className="text-base font-bold text-slate-800 tracking-tight">
-              Cross-Document and Record Checks
-            </h2>
-            <p className="text-xs text-slate-500">
-              Corroboration across multiple filings and central AICTE records (sorted by severity)
-            </p>
-          </div>
-          <span className="text-xs font-mono text-slate-400">
-            {crossDocFindings.length} Cross Checks
-          </span>
-        </div>
-
-        <div className="divide-y divide-slate-200">
-          {crossDocFindings.length === 0 ? (
-            <div className="p-8 text-center text-sm text-slate-400">
-              No cross-document discrepancies recorded for this application.
+                );
+              })}
             </div>
-          ) : (
-            crossDocFindings.map((f) => (
-              <div
-                key={f.id}
-                className="p-5 hover:bg-slate-50/60 transition-colors flex flex-col lg:flex-row lg:items-center justify-between gap-4"
-              >
-                <div className="space-y-1.5 min-w-0">
-                  <div className="flex items-center flex-wrap gap-2">
-                    <span className="text-xs font-mono font-bold text-[#0F2A4A]">
-                      {f.rule}
-                    </span>
-                    <StatusBadge status={f.status} size="sm" />
-                    <SeverityTag severity={f.severity} size="sm" />
-                    <span className="text-xs text-slate-400 font-mono">
-                      Confidence: {Math.round(f.confidence * 100)}%
-                    </span>
-                  </div>
+          </section>
 
-                  <p className="text-sm text-slate-700 leading-relaxed">
-                    {f.explanation}
-                  </p>
-
-                  {/* Summary of compared documents */}
-                  {f.evidence && f.evidence.length > 1 && (
-                    <div className="flex items-center space-x-2 text-xs text-slate-500 pt-1">
-                      <span className="font-semibold text-slate-600">Compared:</span>
-                      <span className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-700">
-                        {f.evidence[0].docName || 'Doc 1'} ({f.evidence[0].value})
-                      </span>
-                      <span>vs</span>
-                      <span className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-700">
-                        {f.evidence[1].docName || 'Doc 2'} ({f.evidence[1].value})
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                <div className="shrink-0">
-                  <Link
-                    to={`/officer/applications/${appId}/findings/${f.id}`}
-                    className="inline-flex items-center px-3 py-1.5 rounded-md bg-[#0F2A4A] text-white text-xs font-semibold hover:bg-[#1F6FEB] transition-colors shadow-2xs"
-                  >
-                    Open Evidence Viewer &rarr;
-                  </Link>
-                </div>
+          {/* 2. Cross-Document and Record Checks */}
+          <section className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
+            <div className="px-6 py-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+              <div>
+                <h2 className="text-base font-bold text-slate-800 tracking-tight">
+                  Cross-Document and Record Checks
+                </h2>
+                <p className="text-xs text-slate-500">
+                  Corroboration across multiple filings and central AICTE records (sorted by severity)
+                </p>
               </div>
-            ))
-          )}
-        </div>
-      </section>
+              <span className="text-xs font-mono text-slate-400">
+                {crossDocFindings.length} Cross Checks
+              </span>
+            </div>
 
-      {/* 3. STEP 6 PLACEHOLDER: Decision Panel Slot */}
-      {/* (Will be built in Step 6: Actions Approve, Request more info, Send for inspection) */}
-      <section>
-        <DecisionPanelPlaceholder />
-      </section>
+            <div className="divide-y divide-slate-200">
+              {crossDocFindings.length === 0 ? (
+                <div className="p-8 text-center text-sm text-slate-400">
+                  No cross-document discrepancies recorded for this application.
+                </div>
+              ) : (
+                crossDocFindings.map((f) => (
+                  <div
+                    key={f.id}
+                    className="p-5 hover:bg-slate-50/60 transition-colors flex flex-col lg:flex-row lg:items-center justify-between gap-4"
+                  >
+                    <div className="space-y-1.5 min-w-0">
+                      <div className="flex items-center flex-wrap gap-2">
+                        <span className="text-xs font-mono font-bold text-[#0F2A4A]">
+                          {f.rule}
+                        </span>
+                        <StatusBadge status={f.status} size="sm" />
+                        <SeverityTag severity={f.severity} size="sm" />
+                        <span className="text-xs text-slate-400 font-mono">
+                          Confidence: {Math.round(f.confidence * 100)}%
+                        </span>
+                      </div>
+
+                      <p className="text-sm text-slate-700 leading-relaxed">
+                        {f.explanation}
+                      </p>
+
+                      {/* Summary of compared documents */}
+                      {f.evidence && f.evidence.length > 1 && (
+                        <div className="flex items-center space-x-2 text-xs text-slate-500 pt-1">
+                          <span className="font-semibold text-slate-600">Compared:</span>
+                          <span className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-700">
+                            {f.evidence[0].docName || 'Doc 1'} ({f.evidence[0].value})
+                          </span>
+                          <span>vs</span>
+                          <span className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-700">
+                            {f.evidence[1].docName || 'Doc 2'} ({f.evidence[1].value})
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="shrink-0">
+                      <Link
+                        to={`/officer/applications/${appId}/findings/${f.id}`}
+                        className="inline-flex items-center px-3 py-1.5 rounded-md bg-[#0F2A4A] text-white text-xs font-semibold hover:bg-[#1F6FEB] transition-colors shadow-2xs"
+                      >
+                        Open Evidence Viewer &rarr;
+                      </Link>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </section>
+
+          {/* 3. Officer Decision Panel */}
+          <section>
+            <DecisionPanel
+              application={application}
+              findings={findings}
+              onDecisionSubmitted={async (updatedApp) => {
+                setApplication(updatedApp);
+                const updatedAudit = await getAudit(appId);
+                setAuditEvents(updatedAudit || []);
+              }}
+            />
+          </section>
+        </>
+      ) : (
+        /* Scoped Application Audit Trail Tab */
+        <section className="space-y-4">
+          <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+            <div>
+              <h3 className="text-sm font-bold text-slate-800">
+                Audit Timeline for {application.id} ({application.institute})
+              </h3>
+              <p className="text-xs text-slate-500">
+                Read-only record of rules applied, records checked, source responses and officer actions.
+              </p>
+            </div>
+            <span className="text-xs font-mono text-slate-500 bg-slate-100 px-2.5 py-1 rounded">
+              {auditEvents.length} Recorded Events
+            </span>
+          </div>
+
+          <AuditTimeline events={auditEvents} highlightAppId={appId} />
+        </section>
+      )}
     </div>
   );
 }

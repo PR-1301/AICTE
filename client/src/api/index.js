@@ -57,12 +57,14 @@ export async function getAudit(appId) {
 /**
  * Submit officer scrutiny decision for an application.
  * @param {string} appId
- * @param {{ decision: string, remarks: string, officer?: string }} decisionPayload
- * @returns {Promise<{ application: Object, auditEvent: Object }>}
+ * @param {string|Object} decision
+ * @param {string} [remarks]
+ * @param {string} [officerId]
+ * @returns {Promise<{ application: Object, auditEvents: Array }>}
  */
-export async function submitDecision(appId, decisionPayload) {
+export async function submitDecision(appId, decision, remarks, officerId) {
   await delay();
-  return mockDb.submitDecision(appId, decisionPayload);
+  return mockDb.submitDecision(appId, decision, remarks, officerId);
 }
 
 /**
