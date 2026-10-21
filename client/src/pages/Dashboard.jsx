@@ -54,7 +54,7 @@ function formatDateTime(dateStr) {
 /**
  * Officer Scrutiny Dashboard (AGENTS.md Section 5.4 & Step 8).
  * 1. Four clickable stat cards that filter the applications table.
- * 2. Status distribution Recharts bar chart (video readable, no second chart).
+ * 2. Status distribution Recharts bar chart (video readable, high contrast).
  * 3. Dynamic alerts panel derived from data with severity sorting.
  * 4. Urgency-sorted, searchable, filterable applications table with keyboard accessibility.
  * 5. Responsive, video-ready typography (base text >= 16px).
@@ -260,35 +260,35 @@ export default function Dashboard() {
   const visibleAlerts = showAlertsExpanded ? alerts : alerts.slice(0, 6);
 
   return (
-    <div className="space-y-8 pb-16 text-slate-800">
+    <div className="space-y-7 pb-16 text-slate-800">
       {/* 1. Header Banner */}
-      <div className="bg-white rounded-xl border border-slate-200/90 shadow-sm p-6 sm:p-7 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
-        <div className="space-y-1.5">
+      <div className="bg-white rounded-xl border border-slate-200/90 shadow-xs p-6 sm:p-7 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+        <div className="space-y-2">
           <div className="flex items-center space-x-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-[#1F6FEB]"></span>
-            <span className="text-xs font-mono font-semibold tracking-wider uppercase text-[#1F6FEB]">
-              AICTE Scrutiny & Approval System
+            <span className="w-2.5 h-2.5 rounded-full bg-[#1F6FEB] animate-pulse"></span>
+            <span className="text-xs font-mono font-bold tracking-wider uppercase text-[#1F6FEB]">
+              AICTE Regulatory Commission &middot; Scrutiny Wing
             </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#0F2A4A] tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#0F2A4A] tracking-tight">
             Officer Scrutiny Worklist
           </h1>
-          <p className="text-base text-slate-600 max-w-3xl leading-relaxed">
-            AI-assisted first-pass validation queue. Preliminary indicators are provided for officer review; final determination rests exclusively with the officer.
+          <p className="text-sm sm:text-base text-slate-600 max-w-3xl leading-relaxed">
+            AI-assisted advisory validation queue. Preliminary statutory indicators are flagged for review; final regulatory determination rests exclusively with the officer.
           </p>
         </div>
 
         {/* Anchor date pill */}
-        <div className="shrink-0 flex flex-col sm:flex-row lg:flex-col items-start lg:items-end gap-2 text-right">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-lg bg-blue-50/90 border border-blue-200/80 text-blue-950 shadow-xs">
+        <div className="shrink-0 flex flex-col sm:flex-row lg:flex-col items-start lg:items-end gap-1.5 text-right">
+          <div className="inline-flex items-center space-x-2 px-3.5 py-2 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 shadow-2xs">
             <svg className="w-4 h-4 text-[#1F6FEB]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
-            <span className="text-sm font-semibold">Demo Review Anchor:</span>
-            <span className="text-sm font-mono font-bold text-[#1F6FEB]">{formatDate(DEMO_TODAY)}</span>
+            <span className="text-xs sm:text-sm font-semibold text-slate-700">Review Anchor:</span>
+            <span className="text-xs sm:text-sm font-mono font-bold text-[#0F2A4A]">{formatDate(DEMO_TODAY)}</span>
           </div>
-          <span className="text-xs text-slate-500 font-medium">
-            Statutory validity computed against anchor date
+          <span className="text-[11px] text-slate-500 font-medium">
+            Statutory document validity calculated against anchor date
           </span>
         </div>
       </div>
@@ -300,9 +300,9 @@ export default function Dashboard() {
         </h2>
 
         {loadingApps ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="bg-white rounded-xl border border-slate-200 p-6 animate-pulse space-y-3">
+              <div key={i} className="bg-white rounded-xl border border-slate-200/90 p-6 animate-pulse space-y-3">
                 <div className="h-4 bg-slate-200 rounded w-1/2"></div>
                 <div className="h-9 bg-slate-200 rounded w-1/4"></div>
                 <div className="h-3 bg-slate-100 rounded w-3/4"></div>
@@ -310,46 +310,46 @@ export default function Dashboard() {
             ))}
           </div>
         ) : errorApps ? (
-          <div className="bg-rose-50 border border-rose-200 rounded-xl p-5 text-rose-800 text-base flex items-center justify-between">
+          <div className="bg-rose-50 border border-rose-300 rounded-xl p-5 text-rose-900 text-base flex items-center justify-between">
             <span>{errorApps}</span>
             <button
               onClick={fetchApplicationsData}
-              className="text-sm font-semibold underline hover:text-rose-950 cursor-pointer"
+              className="text-sm font-bold underline hover:text-rose-950 cursor-pointer"
             >
               Retry
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Card 1: Pending Officer Review */}
             <button
               type="button"
               onClick={() => handleCardFilterClick('pending')}
               className={`text-left rounded-xl border p-5 sm:p-6 transition-all cursor-pointer relative shadow-xs focus:outline-none focus:ring-2 focus:ring-[#1F6FEB] ${
                 cardFilter === 'pending'
-                  ? 'bg-blue-50/80 border-[#1F6FEB] ring-2 ring-[#1F6FEB] shadow-md'
-                  : 'bg-white border-slate-200/90 hover:border-blue-300 hover:shadow-sm'
+                  ? 'bg-blue-50/90 border-[#1F6FEB] ring-2 ring-[#1F6FEB] shadow-md'
+                  : 'bg-white border-slate-200/90 hover:border-blue-300 hover:shadow-xs'
               }`}
             >
               <div className="flex items-center justify-between mb-3">
-                <span className="text-base font-semibold text-slate-700">
+                <span className="text-sm sm:text-base font-bold text-slate-800">
                   Pending Officer Review
                 </span>
-                <div className="w-10 h-10 rounded-lg bg-blue-100 text-[#1F6FEB] flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-blue-100 text-[#1F6FEB] flex items-center justify-center shrink-0">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
               </div>
-              <div className="text-3xl font-extrabold text-[#0F2A4A] tracking-tight mb-1">
+              <div className="text-3xl sm:text-4xl font-extrabold text-[#0F2A4A] tracking-tight mb-1 tabular-nums">
                 {stats.pending}
               </div>
-              <p className="text-sm text-slate-500 font-medium">
-                Applications awaiting human decision
+              <p className="text-xs sm:text-sm text-slate-600 font-medium">
+                Applications awaiting officer determination
               </p>
               {cardFilter === 'pending' && (
-                <span className="mt-3 inline-block text-xs font-semibold text-[#1F6FEB] bg-blue-100/70 px-2.5 py-0.5 rounded-full">
-                  ✓ Filter Active (Click to clear)
+                <span className="mt-3 inline-block text-xs font-bold text-[#1F6FEB] bg-blue-100/90 px-2.5 py-0.5 rounded-full">
+                  &bull; Active Filter (Click to reset)
                 </span>
               )}
             </button>
@@ -360,29 +360,29 @@ export default function Dashboard() {
               onClick={() => handleCardFilterClick('flagged')}
               className={`text-left rounded-xl border p-5 sm:p-6 transition-all cursor-pointer relative shadow-xs focus:outline-none focus:ring-2 focus:ring-amber-500 ${
                 cardFilter === 'flagged'
-                  ? 'bg-amber-50/80 border-amber-500 ring-2 ring-amber-500 shadow-md'
-                  : 'bg-white border-slate-200/90 hover:border-amber-300 hover:shadow-sm'
+                  ? 'bg-amber-50/90 border-amber-500 ring-2 ring-amber-500 shadow-md'
+                  : 'bg-white border-slate-200/90 hover:border-amber-300 hover:shadow-xs'
               }`}
             >
               <div className="flex items-center justify-between mb-3">
-                <span className="text-base font-semibold text-slate-700">
+                <span className="text-sm sm:text-base font-bold text-slate-800">
                   Flagged Applications
                 </span>
-                <div className="w-10 h-10 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center shrink-0">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                   </svg>
                 </div>
               </div>
-              <div className="text-3xl font-extrabold text-amber-800 tracking-tight mb-1">
+              <div className="text-3xl sm:text-4xl font-extrabold text-amber-950 tracking-tight mb-1 tabular-nums">
                 {stats.flagged}
               </div>
-              <p className="text-sm text-slate-500 font-medium">
+              <p className="text-xs sm:text-sm text-slate-600 font-medium">
                 With open high-severity findings
               </p>
               {cardFilter === 'flagged' && (
-                <span className="mt-3 inline-block text-xs font-semibold text-amber-800 bg-amber-100 px-2.5 py-0.5 rounded-full">
-                  ✓ Filter Active (Click to clear)
+                <span className="mt-3 inline-block text-xs font-bold text-amber-900 bg-amber-200/80 px-2.5 py-0.5 rounded-full">
+                  &bull; Active Filter (Click to reset)
                 </span>
               )}
             </button>
@@ -393,29 +393,29 @@ export default function Dashboard() {
               onClick={() => handleCardFilterClick('expired')}
               className={`text-left rounded-xl border p-5 sm:p-6 transition-all cursor-pointer relative shadow-xs focus:outline-none focus:ring-2 focus:ring-rose-500 ${
                 cardFilter === 'expired'
-                  ? 'bg-rose-50/80 border-rose-500 ring-2 ring-rose-500 shadow-md'
-                  : 'bg-white border-slate-200/90 hover:border-rose-300 hover:shadow-sm'
+                  ? 'bg-rose-50/90 border-rose-500 ring-2 ring-rose-500 shadow-md'
+                  : 'bg-white border-slate-200/90 hover:border-rose-300 hover:shadow-xs'
               }`}
             >
               <div className="flex items-center justify-between mb-3">
-                <span className="text-base font-semibold text-slate-700">
+                <span className="text-sm sm:text-base font-bold text-slate-800">
                   Expired Documents
                 </span>
-                <div className="w-10 h-10 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-rose-100 text-rose-800 flex items-center justify-center shrink-0">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
               </div>
-              <div className="text-3xl font-extrabold text-rose-800 tracking-tight mb-1">
+              <div className="text-3xl sm:text-4xl font-extrabold text-rose-950 tracking-tight mb-1 tabular-nums">
                 {stats.expired}
               </div>
-              <p className="text-sm text-slate-500 font-medium">
+              <p className="text-xs sm:text-sm text-slate-600 font-medium">
                 Lapsed certificate or NOC validity
               </p>
               {cardFilter === 'expired' && (
-                <span className="mt-3 inline-block text-xs font-semibold text-rose-800 bg-rose-100 px-2.5 py-0.5 rounded-full">
-                  ✓ Filter Active (Click to clear)
+                <span className="mt-3 inline-block text-xs font-bold text-rose-900 bg-rose-200/80 px-2.5 py-0.5 rounded-full">
+                  &bull; Active Filter (Click to reset)
                 </span>
               )}
             </button>
@@ -426,29 +426,29 @@ export default function Dashboard() {
               onClick={() => handleCardFilterClick('verified')}
               className={`text-left rounded-xl border p-5 sm:p-6 transition-all cursor-pointer relative shadow-xs focus:outline-none focus:ring-2 focus:ring-emerald-500 ${
                 cardFilter === 'verified'
-                  ? 'bg-emerald-50/80 border-emerald-500 ring-2 ring-emerald-500 shadow-md'
-                  : 'bg-white border-slate-200/90 hover:border-emerald-300 hover:shadow-sm'
+                  ? 'bg-emerald-50/90 border-emerald-500 ring-2 ring-emerald-500 shadow-md'
+                  : 'bg-white border-slate-200/90 hover:border-emerald-300 hover:shadow-xs'
               }`}
             >
               <div className="flex items-center justify-between mb-3">
-                <span className="text-base font-semibold text-slate-700">
+                <span className="text-sm sm:text-base font-bold text-slate-800">
                   Fully Verified
                 </span>
-                <div className="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
               </div>
-              <div className="text-3xl font-extrabold text-emerald-800 tracking-tight mb-1">
+              <div className="text-3xl sm:text-4xl font-extrabold text-emerald-950 tracking-tight mb-1 tabular-nums">
                 {stats.fullyVerified}
               </div>
-              <p className="text-sm text-slate-500 font-medium">
+              <p className="text-xs sm:text-sm text-slate-600 font-medium">
                 Zero open statutory discrepancies
               </p>
               {cardFilter === 'verified' && (
-                <span className="mt-3 inline-block text-xs font-semibold text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full">
-                  ✓ Filter Active (Click to clear)
+                <span className="mt-3 inline-block text-xs font-bold text-emerald-900 bg-emerald-200/80 px-2.5 py-0.5 rounded-full">
+                  &bull; Active Filter (Click to reset)
                 </span>
               )}
             </button>
@@ -457,20 +457,20 @@ export default function Dashboard() {
       </section>
 
       {/* 3. Middle Section: Chart + Alerts Panel */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Recharts Chart: Status Distribution (7 cols on lg) */}
-        <div className="lg:col-span-7 bg-white rounded-xl border border-slate-200/90 shadow-sm p-6 sm:p-7 flex flex-col h-full">
+        <div className="lg:col-span-7 bg-white rounded-xl border border-slate-200/90 shadow-xs p-6 sm:p-7 flex flex-col h-full">
           <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
             <div>
-              <h3 className="text-lg font-bold text-[#0F2A4A] tracking-tight">
+              <h3 className="text-base sm:text-lg font-bold text-[#0F2A4A] tracking-tight">
                 Application Pipeline Distribution
               </h3>
-              <p className="text-sm text-slate-500 mt-0.5">
-                Current count of institutions across validation & decision stages
+              <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+                Current count of institutions across validation and decision stages
               </p>
             </div>
-            <span className="text-xs font-semibold px-2.5 py-1 rounded bg-slate-100 text-slate-700">
-              {applications.length} Total Applications
+            <span className="text-xs font-mono font-bold px-3 py-1 rounded-lg bg-slate-100 text-slate-700 border border-slate-200">
+              {applications.length} Total
             </span>
           </div>
 
@@ -487,7 +487,7 @@ export default function Dashboard() {
                 >
                   <XAxis
                     dataKey="shortName"
-                    tick={{ fontSize: 13, fill: '#1E293B', fontWeight: 600 }}
+                    tick={{ fontSize: 13, fill: '#0F2A4A', fontWeight: 600 }}
                     interval={0}
                     tickLine={false}
                     axisLine={{ stroke: '#CBD5E1' }}
@@ -507,7 +507,7 @@ export default function Dashboard() {
                           <div className="bg-[#0F2A4A] text-white p-3 rounded-lg shadow-lg border border-slate-700 text-sm">
                             <p className="font-bold">{data.name}</p>
                             <p className="text-slate-300 mt-1">
-                              Institutions: <span className="font-semibold text-white">{data.count}</span>
+                              Institutions: <span className="font-bold text-white">{data.count}</span>
                             </p>
                           </div>
                         );
@@ -531,31 +531,31 @@ export default function Dashboard() {
           )}
 
           {/* Color & Label Legend */}
-          <div className="mt-4 pt-3 border-t border-slate-100 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs sm:text-sm font-medium text-slate-600">
+          <div className="mt-4 pt-3.5 border-t border-slate-100 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-semibold text-slate-600">
             {chartData.map((item) => (
               <div key={item.statusKey} className="flex items-center space-x-1.5">
                 <span className="w-3 h-3 rounded-xs shrink-0" style={{ backgroundColor: item.fill }}></span>
-                <span>{item.name}: <strong className="text-slate-900">{item.count}</strong></span>
+                <span>{item.name}: <strong className="text-slate-900 font-bold">{item.count}</strong></span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Alerts Panel (5 cols on lg) */}
-        <div className="lg:col-span-5 bg-white rounded-xl border border-slate-200/90 shadow-sm p-6 sm:p-7 flex flex-col h-full">
+        <div className="lg:col-span-5 bg-white rounded-xl border border-slate-200/90 shadow-xs p-6 sm:p-7 flex flex-col h-full">
           <div className="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
             <div>
               <div className="flex items-center space-x-2">
-                <h3 className="text-lg font-bold text-[#0F2A4A] tracking-tight">
+                <h3 className="text-base sm:text-lg font-bold text-[#0F2A4A] tracking-tight">
                   Scrutiny & Discrepancy Alerts
                 </h3>
-                <span className={`text-xs px-2 py-0.5 rounded-full font-bold ${
-                  alerts.length > 0 ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-800'
+                <span className={`text-xs px-2.5 py-0.5 rounded-full font-bold ${
+                  alerts.length > 0 ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'bg-emerald-100 text-emerald-900'
                 }`}>
                   {alerts.length}
                 </span>
               </div>
-              <p className="text-sm text-slate-500 mt-0.5">
+              <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
                 Lapsed validity, discrepancies & source timeouts
               </p>
             </div>
@@ -564,7 +564,7 @@ export default function Dashboard() {
               <button
                 type="button"
                 onClick={() => setShowAlertsExpanded((prev) => !prev)}
-                className="text-xs font-semibold text-[#1F6FEB] hover:underline cursor-pointer"
+                className="text-xs font-bold text-[#1F6FEB] hover:underline cursor-pointer"
               >
                 {showAlertsExpanded ? 'Show top 6' : `Show all (${alerts.length})`}
               </button>
@@ -581,18 +581,18 @@ export default function Dashboard() {
               ))}
             </div>
           ) : errorAlerts ? (
-            <div className="bg-rose-50 border border-rose-200 rounded-lg p-4 text-rose-800 text-sm">
+            <div className="bg-rose-50 border border-rose-300 rounded-lg p-4 text-rose-900 text-sm">
               {errorAlerts}
             </div>
           ) : alerts.length === 0 ? (
             <div className="flex-1 flex flex-col items-center justify-center p-8 text-center bg-slate-50/60 rounded-lg border border-dashed border-slate-200 min-h-[220px]">
               <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mb-3">
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h4 className="text-base font-semibold text-slate-800">No active alerts</h4>
-              <p className="text-sm text-slate-500 mt-1 max-w-xs">
+              <h4 className="text-base font-bold text-slate-800">No active alerts</h4>
+              <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-xs">
                 All statutory discrepancies resolved or applications processed.
               </p>
             </div>
@@ -605,7 +605,7 @@ export default function Dashboard() {
                 return (
                   <div
                     key={alert.id}
-                    className={`rounded-lg border p-3.5 transition-colors text-sm ${
+                    className={`rounded-xl border p-3.5 transition-colors text-sm ${
                       isHigh
                         ? 'bg-rose-50/60 border-rose-200 hover:bg-rose-50'
                         : isMedium
@@ -625,35 +625,33 @@ export default function Dashboard() {
                               : 'bg-blue-200/90 text-blue-900'
                           }`}
                         >
-                          <span>
-                            {isHigh ? '!' : isMedium ? '⚠' : 'ℹ'}
-                          </span>
+                          <span>{isHigh ? '!' : isMedium ? '⚠' : 'ℹ'}</span>
                           <span>{SEVERITY_LABELS[alert.severity] || alert.severity}</span>
                         </span>
-                        <span className="font-mono text-xs font-bold text-slate-600">
+                        <span className="font-mono text-xs font-bold text-slate-700">
                           {alert.applicationId}
                         </span>
                       </div>
-                      <span className="text-xs text-slate-600 font-medium whitespace-nowrap">
+                      <span className="text-xs text-slate-500 font-medium whitespace-nowrap">
                         {alert.ts ? formatDate(alert.ts) : ''}
                       </span>
                     </div>
 
-                    <h4 className="text-sm font-semibold text-[#0F2A4A] mt-1.5">
+                    <h4 className="text-sm font-bold text-[#0F2A4A] mt-1.5">
                       {alert.institute}
                     </h4>
-                    <p className="text-sm text-slate-700 mt-1 leading-snug">
+                    <p className="text-xs sm:text-sm text-slate-700 mt-1 leading-snug">
                       {alert.message}
                     </p>
 
-                    <div className="mt-2.5 pt-2 border-t border-slate-200/60 flex items-center justify-between">
+                    <div className="mt-2.5 pt-2 border-t border-slate-200/70 flex items-center justify-between">
                       <span className="text-xs text-slate-500 font-medium">
                         {alert.title}
                       </span>
                       {alert.link && (
                         <Link
                           to={alert.link}
-                          className="text-xs font-semibold text-[#1F6FEB] hover:text-blue-800 flex items-center space-x-1"
+                          className="text-xs font-bold text-[#1F6FEB] hover:text-[#0F2A4A] flex items-center space-x-1"
                         >
                           <span>Review record</span>
                           <span aria-hidden="true">&rarr;</span>
@@ -671,26 +669,26 @@ export default function Dashboard() {
       {/* 4. Applications Table Section */}
       <section aria-labelledby="applications-table-heading" className="space-y-4">
         {/* Table Header & Search/Filter Controls */}
-        <div className="bg-white rounded-xl border border-slate-200/90 shadow-sm p-5 sm:p-6 space-y-4">
+        <div className="bg-white rounded-xl border border-slate-200/90 shadow-xs p-5 sm:p-6 space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h2 id="applications-table-heading" className="text-xl font-bold text-[#0F2A4A] tracking-tight">
+              <h2 id="applications-table-heading" className="text-lg sm:text-xl font-extrabold text-[#0F2A4A] tracking-tight">
                 Institutional Submissions Registry
               </h2>
-              <p className="text-base text-slate-500 mt-0.5">
+              <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
                 Sorted by urgency: open high-severity findings first, then expired documents, then submission date
               </p>
             </div>
 
-            <div className="flex items-center space-x-3 text-sm">
-              <span className="font-semibold text-slate-700">
-                Showing {sortedApplications.length} of {applications.length}
+            <div className="flex items-center space-x-3 text-xs sm:text-sm">
+              <span className="font-semibold text-slate-600">
+                Showing <strong className="text-slate-900">{sortedApplications.length}</strong> of {applications.length} applications
               </span>
             </div>
           </div>
 
           {/* Filter Bar */}
-          <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 pt-2">
+          <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 pt-1">
             {/* Search Input */}
             <div className="sm:col-span-8 relative">
               <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
@@ -703,7 +701,7 @@ export default function Dashboard() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search by institute name or application ID (e.g., Demo Institute, APP-001)..."
-                className="w-full pl-10 pr-4 py-2.5 rounded-lg border border-slate-300 text-base text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1F6FEB] focus:border-[#1F6FEB] transition-colors"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-sm sm:text-base text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1F6FEB] focus:border-[#1F6FEB] transition-colors"
               />
             </div>
 
@@ -712,7 +710,7 @@ export default function Dashboard() {
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-base text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#1F6FEB] focus:border-[#1F6FEB] transition-colors bg-white font-medium"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm sm:text-base text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#1F6FEB] focus:border-[#1F6FEB] transition-colors bg-white font-medium cursor-pointer"
               >
                 <option value="ALL">All Application Statuses</option>
                 {Object.values(APPLICATION_STATUS).map((status) => (
@@ -726,40 +724,40 @@ export default function Dashboard() {
 
           {/* Active Filter Summary Bar */}
           {isFiltering && (
-            <div className="bg-blue-50/70 border border-blue-200/80 rounded-lg px-4 py-2.5 flex items-center justify-between flex-wrap gap-2 text-sm">
-              <div className="flex items-center space-x-2 flex-wrap gap-1">
-                <span className="font-semibold text-blue-900">Active filters:</span>
+            <div className="bg-blue-50/80 border border-blue-200/80 rounded-xl px-4 py-2.5 flex items-center justify-between flex-wrap gap-2 text-xs sm:text-sm">
+              <div className="flex items-center space-x-2 flex-wrap gap-1.5">
+                <span className="font-bold text-blue-950">Active filters:</span>
                 {cardFilter && (
-                  <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 font-medium">
+                  <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-blue-100 text-blue-900 font-semibold border border-blue-200">
                     <span>Card:</span>
                     <strong className="capitalize">{cardFilter}</strong>
                     <button
                       onClick={() => setCardFilter(null)}
-                      className="ml-1 hover:text-blue-950 font-bold"
+                      className="ml-1 hover:text-blue-950 font-bold cursor-pointer"
                     >
                       &times;
                     </button>
                   </span>
                 )}
                 {statusFilter !== 'ALL' && (
-                  <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 font-medium">
+                  <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-blue-100 text-blue-900 font-semibold border border-blue-200">
                     <span>Status:</span>
                     <strong>{APPLICATION_STATUS_LABELS[statusFilter] || statusFilter}</strong>
                     <button
                       onClick={() => setStatusFilter('ALL')}
-                      className="ml-1 hover:text-blue-950 font-bold"
+                      className="ml-1 hover:text-blue-950 font-bold cursor-pointer"
                     >
                       &times;
                     </button>
                   </span>
                 )}
                 {searchQuery.trim() && (
-                  <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-800 font-medium">
+                  <span className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-blue-100 text-blue-900 font-semibold border border-blue-200">
                     <span>Search:</span>
                     <strong>"{searchQuery}"</strong>
                     <button
                       onClick={() => setSearchQuery('')}
-                      className="ml-1 hover:text-blue-950 font-bold"
+                      className="ml-1 hover:text-blue-950 font-bold cursor-pointer"
                     >
                       &times;
                     </button>
@@ -770,7 +768,7 @@ export default function Dashboard() {
               <button
                 type="button"
                 onClick={handleClearFilters}
-                className="text-sm font-semibold text-[#1F6FEB] hover:underline cursor-pointer"
+                className="text-xs sm:text-sm font-bold text-[#1F6FEB] hover:underline cursor-pointer"
               >
                 Clear all filters
               </button>
@@ -779,7 +777,7 @@ export default function Dashboard() {
         </div>
 
         {/* Table Content */}
-        <div className="bg-white rounded-xl border border-slate-200/90 shadow-sm overflow-hidden">
+        <div className="bg-white rounded-xl border border-slate-200/90 shadow-xs overflow-hidden">
           {loadingApps ? (
             <div className="p-8 text-center text-slate-500 text-base animate-pulse space-y-3">
               <div className="h-6 bg-slate-200 rounded w-1/3 mx-auto"></div>
@@ -788,7 +786,7 @@ export default function Dashboard() {
               <div className="h-12 bg-slate-100 rounded"></div>
             </div>
           ) : errorApps ? (
-            <div className="p-8 text-center text-rose-700 bg-rose-50 text-base">
+            <div className="p-8 text-center text-rose-800 bg-rose-50 text-base">
               {errorApps}
             </div>
           ) : sortedApplications.length === 0 ? (
@@ -801,7 +799,7 @@ export default function Dashboard() {
               <h3 className="text-lg font-bold text-slate-800">
                 {applications.length === 0 ? 'No applications in system' : 'No matching applications found'}
               </h3>
-              <p className="text-base text-slate-500 max-w-md mx-auto">
+              <p className="text-sm text-slate-500 max-w-md mx-auto">
                 {applications.length === 0
                   ? 'There are currently no institutional applications queued for review.'
                   : 'No records match your current search and filter settings. Try clearing the filters.'}
@@ -810,7 +808,7 @@ export default function Dashboard() {
                 <button
                   type="button"
                   onClick={handleClearFilters}
-                  className="mt-2 inline-flex items-center px-4 py-2 rounded-lg bg-[#0F2A4A] text-white text-sm font-semibold hover:bg-slate-800 transition-colors cursor-pointer"
+                  className="mt-2 inline-flex items-center px-4 py-2 rounded-lg bg-[#0F2A4A] text-white text-sm font-semibold hover:bg-[#1F6FEB] transition-colors cursor-pointer"
                 >
                   Reset filters
                 </button>
@@ -819,38 +817,38 @@ export default function Dashboard() {
           ) : (
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-slate-200 text-left">
-                <thead className="bg-slate-50/80 text-xs font-bold uppercase tracking-wider text-slate-600">
+                <thead className="bg-slate-50/90 text-xs font-bold uppercase tracking-wider text-slate-600">
                   <tr>
-                    <th scope="col" className="px-5 py-3.5">
+                    <th scope="col" className="px-5 py-4">
                       Institute Name
                     </th>
-                    <th scope="col" className="px-4 py-3.5">
+                    <th scope="col" className="px-4 py-4">
                       Application ID
                     </th>
-                    <th scope="col" className="px-4 py-3.5">
+                    <th scope="col" className="px-4 py-4">
                       Approval Category
                     </th>
-                    <th scope="col" className="px-4 py-3.5">
+                    <th scope="col" className="px-4 py-4">
                       Submitted
                     </th>
-                    <th scope="col" className="px-4 py-3.5">
+                    <th scope="col" className="px-4 py-4">
                       Review Status
                     </th>
-                    <th scope="col" className="px-4 py-3.5 text-center">
+                    <th scope="col" className="px-4 py-4 text-center">
                       Open Findings
                     </th>
-                    <th scope="col" className="px-4 py-3.5 text-center">
+                    <th scope="col" className="px-4 py-4 text-center">
                       High Severity
                     </th>
-                    <th scope="col" className="px-4 py-3.5">
+                    <th scope="col" className="px-4 py-4">
                       Last Updated
                     </th>
-                    <th scope="col" className="px-5 py-3.5 text-right">
+                    <th scope="col" className="px-5 py-4 text-right">
                       Action
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-200/80 bg-white text-base">
+                <tbody className="divide-y divide-slate-200/80 bg-white text-sm sm:text-base">
                   {sortedApplications.map((app) => {
                     const rowLink = `/officer/applications/${app.id}`;
                     const hasHighSeverity = (app.highSeverityOpen || 0) > 0;
@@ -864,16 +862,16 @@ export default function Dashboard() {
                         onKeyDown={(e) => {
                           if (e.key === 'Enter') navigate(rowLink);
                         }}
-                        className="hover:bg-blue-50/60 focus:bg-blue-50/80 focus:outline-none transition-colors cursor-pointer group"
+                        className="hover:bg-blue-50/50 focus:bg-blue-50/80 focus:outline-none transition-colors cursor-pointer group"
                       >
                         {/* Institute Name */}
-                        <td className="px-5 py-4 font-semibold text-[#0F2A4A] group-hover:text-[#1F6FEB] transition-colors">
+                        <td className="px-5 py-4 font-bold text-[#0F2A4A] group-hover:text-[#1F6FEB] transition-colors">
                           <div className="flex items-center space-x-2">
                             <span>{app.institute}</span>
                             {hasExpiredDoc && (
                               <span
                                 title="Contains document with lapsed statutory validity"
-                                className="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-rose-100 text-rose-800"
+                                className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-bold bg-rose-100 text-rose-800 border border-rose-300"
                               >
                                 Expired Doc
                               </span>
@@ -882,36 +880,36 @@ export default function Dashboard() {
                         </td>
 
                         {/* ID */}
-                        <td className="px-4 py-4 font-mono font-medium text-slate-700 whitespace-nowrap">
+                        <td className="px-4 py-4 font-mono font-bold text-slate-700 whitespace-nowrap text-sm">
                           {app.id}
                         </td>
 
                         {/* Category */}
-                        <td className="px-4 py-4 text-slate-600 text-sm sm:text-base">
+                        <td className="px-4 py-4 text-slate-600 text-sm">
                           {app.category}
                         </td>
 
                         {/* Submitted Date */}
-                        <td className="px-4 py-4 text-slate-600 whitespace-nowrap text-sm sm:text-base">
+                        <td className="px-4 py-4 text-slate-600 whitespace-nowrap text-sm font-medium">
                           {formatDate(app.submittedOn)}
                         </td>
 
                         {/* Status Badge */}
                         <td className="px-4 py-4 whitespace-nowrap">
-                          <StatusBadge status={app.status} size="md" />
+                          <StatusBadge status={app.status} size="sm" />
                         </td>
 
                         {/* Open Findings */}
                         <td className="px-4 py-4 text-center whitespace-nowrap">
                           {app.openFindings === 0 ? (
-                            <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-800 border border-emerald-200">
+                            <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
                               <span>✓</span>
                               <span>0 Clean</span>
                             </span>
                           ) : (
-                            <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-800 border border-amber-200">
+                            <span className="inline-flex items-center space-x-1 px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-900 border border-amber-300">
                               <span>{app.openFindings}</span>
-                              <span className="font-normal text-amber-700">open</span>
+                              <span className="font-semibold text-amber-800">open</span>
                             </span>
                           )}
                         </td>
@@ -924,12 +922,12 @@ export default function Dashboard() {
                               <span>{app.highSeverityOpen}</span>
                             </span>
                           ) : (
-                            <span className="text-slate-400 text-sm">-</span>
+                            <span className="text-slate-400 text-sm font-mono">-</span>
                           )}
                         </td>
 
                         {/* Last Updated */}
-                        <td className="px-4 py-4 text-slate-500 text-xs sm:text-sm whitespace-nowrap">
+                        <td className="px-4 py-4 text-slate-500 text-xs whitespace-nowrap font-mono">
                           {formatDateTime(app.lastUpdated)}
                         </td>
 
@@ -938,7 +936,7 @@ export default function Dashboard() {
                           <Link
                             to={rowLink}
                             onClick={(e) => e.stopPropagation()}
-                            className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#0F2A4A] text-white text-sm font-semibold hover:bg-[#1F6FEB] transition-colors shadow-xs"
+                            className="inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-[#0F2A4A] text-white text-xs font-bold hover:bg-[#1F6FEB] transition-colors shadow-xs"
                           >
                             <span>Open</span>
                             <span aria-hidden="true">&rarr;</span>
@@ -955,12 +953,12 @@ export default function Dashboard() {
       </section>
 
       {/* Advisory Guidance Notice */}
-      <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-center justify-between text-sm text-slate-600">
+      <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-center justify-between text-xs sm:text-sm text-slate-600">
         <div className="flex items-center space-x-2">
           <svg className="w-5 h-5 text-slate-500 shrink-0" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
           </svg>
-          <span>{DISCLAIMER_ADVISORY}</span>
+          <span className="font-medium">{DISCLAIMER_ADVISORY}</span>
         </div>
         <span className="text-xs text-slate-500 font-mono hidden md:inline">
           Ref: AICTE Regulatory Guidelines SIH26261
@@ -969,3 +967,4 @@ export default function Dashboard() {
     </div>
   );
 }
+

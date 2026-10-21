@@ -96,20 +96,43 @@ export default function Layout() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F3F6FA] text-slate-800 antialiased font-sans">
-      {/* Persistent Demo Ribbon (AGENTS.md Section 2) */}
-      <DemoRibbon />
-
       {/* Top Header Bar */}
       <header className="bg-[#0F2A4A] text-white border-b border-[#1F6FEB]/30 shadow-md sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          {/* Brand & Portal Name */}
+          {/* Brand & Portal Name with Favicon Shield Logo */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-lg bg-[#1F6FEB] flex items-center justify-center font-bold text-lg text-white shadow-sm border border-white/20">
-              AI
-            </div>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 32 32"
+              fill="none"
+              className="w-9 h-9 shrink-0 rounded-lg shadow-sm"
+              aria-label="AICTE Emblem"
+            >
+              <rect width="32" height="32" rx="8" fill="#14345B" stroke="#1F6FEB" strokeWidth="1" />
+              <path
+                d="M16 4L6 9V17C6 23.08 10.27 28.74 16 30C21.73 28.74 26 23.08 26 17V9L16 4Z"
+                fill="#1F6FEB"
+                fillOpacity="0.35"
+                stroke="#3B82F6"
+                strokeWidth="2"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M11 16L14.5 19.5L21 13"
+                stroke="#FBBF24"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
             <div>
-              <div className="text-base sm:text-lg font-semibold tracking-tight text-white leading-tight">
-                AICTE Application Validation Portal
+              <div className="flex items-center space-x-2">
+                <span className="text-base sm:text-lg font-semibold tracking-tight text-white leading-tight">
+                  AICTE Application Validation Portal
+                </span>
+                <span className="hidden lg:inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-slate-800/90 text-slate-300 border border-slate-700/80">
+                  Concept Demo · Synthetic Data
+                </span>
               </div>
               <div className="text-xs text-slate-300">
                 Ministry of Education · Advisory First-Pass Scrutiny
@@ -118,7 +141,7 @@ export default function Layout() {
           </div>
 
           {/* Reset Demo control & Role indicator */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3 sm:space-x-4">
             {resetMessage && (
               <span className="hidden sm:inline-flex items-center space-x-1.5 text-xs font-semibold bg-emerald-700/90 text-emerald-100 px-3 py-1 rounded-full border border-emerald-500 shadow-xs animate-fade-in">
                 <span>✓</span>
@@ -141,13 +164,11 @@ export default function Layout() {
             </button>
 
             {/* Role indicator (AGENTS.md Section 5.6) */}
-            <div className="flex items-center space-x-2 pl-3 border-l border-slate-600 text-xs sm:text-sm">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-              <div className="text-left">
-                <span className="font-semibold text-slate-100">Officer Portal</span>
-                <span className="hidden sm:inline text-slate-400 text-xs block font-mono">
-                  {AUDIT_ACTOR.OFFICER}
-                </span>
+            <div className="flex items-center space-x-2.5 pl-3 border-l border-slate-600/80">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 shrink-0"></span>
+              <div className="leading-tight">
+                <div className="text-xs sm:text-sm font-semibold text-slate-100">Officer Portal</div>
+                <div className="text-[11px] font-mono text-slate-400">{AUDIT_ACTOR.OFFICER}</div>
               </div>
             </div>
           </div>
