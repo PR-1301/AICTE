@@ -19,7 +19,7 @@ export default function ComponentsShowcase() {
             </p>
           </div>
           <span className="self-start sm:self-auto text-xs font-mono bg-blue-50 text-[#1F6FEB] border border-blue-200 px-2.5 py-1 rounded">
-            Temporary Inspection View
+            Developer Tools Inspection View
           </span>
         </div>
       </div>

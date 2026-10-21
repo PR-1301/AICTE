@@ -4,6 +4,7 @@ import { getApplication, getFinding, getFindings } from '../api';
 import DocViewer from '../components/DocViewer';
 import FindingCard from '../components/FindingCard';
 import StatusBadge from '../components/StatusBadge';
+import ErrorState from '../components/ErrorState';
 import { FINDING_STATUS } from '../constants';
 
 /**
@@ -55,6 +56,7 @@ export default function EvidenceViewer() {
         setApplication(appData);
         setFinding(findingData);
         setAllFindings(findingsList || []);
+        document.title = `Evidence: ${findingData.rule?.replace(/_/g, ' ') || fid} (${appData.id}) · AICTE Officer Portal`;
       } catch (err) {
         console.error('Failed to load evidence viewer:', err);
         if (isMounted) setError('An error occurred while loading validation evidence.');
@@ -65,21 +67,27 @@ export default function EvidenceViewer() {
 
     loadEvidenceData();
 
+    const handleReset = () => {
+      loadEvidenceData();
+    };
+    window.addEventListener('aicte:reset-demo', handleReset);
+
     return () => {
       isMounted = false;
+      window.removeEventListener('aicte:reset-demo', handleReset);
     };
   }, [appId, fid]);
 
   // Loading state
   if (loading) {
     return (
-      <div className="space-y-6 animate-pulse">
-        <div className="h-10 bg-slate-200 rounded w-1/3"></div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[450px]">
-          <div className="bg-slate-200 rounded-lg"></div>
-          <div className="bg-slate-200 rounded-lg"></div>
+      <div className="space-y-6 animate-pulse" aria-busy="true" aria-label="Loading validation evidence">
+        <div className="h-10 bg-white rounded-lg border border-slate-200 p-2 w-1/3"></div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[480px]">
+          <div className="bg-white rounded-xl border border-slate-200 p-6"></div>
+          <div className="bg-white rounded-xl border border-slate-200 p-6"></div>
         </div>
-        <div className="h-44 bg-slate-200 rounded-lg"></div>
+        <div className="h-44 bg-white rounded-xl border border-slate-200 p-6"></div>
       </div>
     );
   }
@@ -87,21 +95,11 @@ export default function EvidenceViewer() {
   // Error state
   if (error || !finding || !application) {
     return (
-      <div className="bg-white rounded-lg border border-rose-200 shadow-sm p-8 text-center max-w-2xl mx-auto my-8">
-        <div className="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto mb-3">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-          </svg>
-        </div>
-        <h3 className="text-lg font-bold text-slate-800 mb-2">Evidence Viewer Notice</h3>
-        <p className="text-sm text-slate-600 mb-6">{error || 'Finding record unavailable.'}</p>
-        <Link
-          to={`/officer/applications/${appId || 'APP-001'}`}
-          className="inline-flex items-center px-4 py-2 rounded-md bg-[#0F2A4A] text-white text-sm font-medium hover:bg-[#1F6FEB] transition-colors"
-        >
-          ← Return to Application Review
-        </Link>
-      </div>
+      <ErrorState
+        title="Validation Evidence Not Found"
+        message={error || `Finding record "${fid}" for application "${appId}" could not be retrieved.`}
+        onRetry={() => window.location.reload()}
+      />
     );
   }
 

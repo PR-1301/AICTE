@@ -108,6 +108,7 @@ export default function Dashboard() {
 
   // Initial load
   useEffect(() => {
+    document.title = 'Officer Scrutiny Worklist · AICTE Validation Portal';
     fetchApplicationsData();
     fetchAlertsData();
 

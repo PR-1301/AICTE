@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { getAudit, getApplications } from '../api';
 import AuditTimeline from '../portals/officer/components/AuditTimeline';
+import ErrorState from '../components/ErrorState';
 import { AUDIT_ACTION, AUDIT_ACTION_LABELS, AUDIT_ACTOR } from '../constants';
 
 /**
@@ -29,6 +30,7 @@ export default function AuditTrail() {
       ]);
       setEvents(allAudit || []);
       setApplications(allApps || []);
+      document.title = 'Audit Trail & Compliance Log · AICTE Officer Portal';
     } catch (err) {
       console.error('Failed to load audit trail:', err);
       setError('Unable to retrieve immutable audit trail records.');
@@ -225,15 +227,11 @@ export default function AuditTrail() {
 
       {/* Error State */}
       {error && !loading && (
-        <div className="bg-white rounded-lg border border-rose-200 p-8 text-center text-rose-700">
-          <p className="font-semibold">{error}</p>
-          <button
-            onClick={loadData}
-            className="mt-3 px-4 py-1.5 bg-[#0F2A4A] text-white rounded text-xs font-semibold hover:bg-[#1F6FEB]"
-          >
-            Retry Loading
-          </button>
-        </div>
+        <ErrorState
+          title="Audit Trail Service Unavailable"
+          message={error}
+          onRetry={loadData}
+        />
       )}
 
       {/* Empty State: Two cases: filtered empty vs totally empty */}

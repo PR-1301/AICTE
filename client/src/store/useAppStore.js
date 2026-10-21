@@ -17,4 +17,13 @@ export const useAppStore = create((set) => ({
   setSelectedAppId: (id) => set({ selectedAppId: id }),
   selectedFindingId: null,
   setSelectedFindingId: (fid) => set({ selectedFindingId: fid }),
+
+  // Reset store back to clean seed defaults
+  resetStore: () =>
+    set({
+      statusFilter: 'ALL',
+      searchQuery: '',
+      selectedAppId: 'APP-001',
+      selectedFindingId: null,
+    }),
 }));
