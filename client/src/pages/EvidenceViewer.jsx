@@ -126,6 +126,19 @@ export default function EvidenceViewer() {
 
   return (
     <div className="space-y-6 pb-12">
+      {/* Top Navigation Bar: Back to Application & Finding Selector */}
+      <div className="flex items-center justify-between">
+        <Link
+          to={`/officer/applications/${appId}`}
+          className="inline-flex items-center space-x-1.5 text-xs sm:text-sm font-medium text-slate-600 hover:text-[#0F2A4A] transition-colors"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          <span>Back to Application ({appId})</span>
+        </Link>
+      </div>
+
       {/* Navigation Breadcrumbs & Finding Selector Bar */}
       <div className="bg-white rounded-lg border border-slate-200 shadow-sm p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
