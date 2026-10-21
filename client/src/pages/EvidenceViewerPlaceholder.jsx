@@ -23,7 +23,7 @@ export default function EvidenceViewerPlaceholder() {
       </div>
       <div>
         <Link
-          to={`/applications/${id || 'APP-001'}`}
+          to={`/officer/applications/${id || 'APP-001'}`}
           className="text-xs text-[#1F6FEB] hover:underline"
         >
           ← Back to Application Review

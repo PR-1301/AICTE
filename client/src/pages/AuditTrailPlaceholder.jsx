@@ -13,7 +13,7 @@ export default function AuditTrailPlaceholder() {
         Vertical timeline of system rules and live officer actions, filterable by actor and linked to findings, will be mounted here in step 7.
       </p>
       <div className="inline-block px-3 py-1 bg-slate-100 text-slate-600 rounded text-xs font-mono">
-        Route: /audit
+        Route: /officer/audit
       </div>
     </div>
   );

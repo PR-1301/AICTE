@@ -26,7 +26,7 @@ export default function Layout() {
 
   const navItems = [
     {
-      to: '/dashboard',
+      to: '/officer/dashboard',
       label: 'Dashboard',
       icon: (
         <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,7 +35,7 @@ export default function Layout() {
       ),
     },
     {
-      to: '/applications/APP-001',
+      to: '/officer/applications/APP-001',
       label: 'Application Review',
       sublabel: 'APP-001 (Demo)',
       icon: (
@@ -45,11 +45,21 @@ export default function Layout() {
       ),
     },
     {
-      to: '/audit',
+      to: '/officer/audit',
       label: 'Audit Trail',
       icon: (
         <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      ),
+    },
+    {
+      to: '/officer/_components',
+      label: 'UI Components',
+      sublabel: 'Visual Check (Step 3)',
+      icon: (
+        <svg className="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
         </svg>
       ),
     },
@@ -126,7 +136,7 @@ export default function Layout() {
                 to={item.to}
                 className={({ isActive }) =>
                   `flex items-center px-3 py-2.5 rounded-md text-sm font-medium transition-colors ${
-                    isActive || (item.to.startsWith('/applications') && location.pathname.startsWith('/applications'))
+                    isActive || (item.to.startsWith('/officer/applications') && location.pathname.startsWith('/officer/applications'))
                       ? 'bg-[#0F2A4A] text-white shadow-sm'
                       : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900'
                   }`

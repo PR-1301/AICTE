@@ -21,7 +21,7 @@ export default function ApplicationReviewPlaceholder() {
       </div>
       <div>
         <Link
-          to={`/applications/${id || 'APP-001'}/findings/F-003`}
+          to={`/officer/applications/${id || 'APP-001'}/findings/F-003`}
           className="text-xs text-[#1F6FEB] hover:underline"
         >
           Preview Evidence Viewer route →

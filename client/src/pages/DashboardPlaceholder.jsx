@@ -13,7 +13,7 @@ export default function DashboardPlaceholder() {
         Stat cards, applications table, Recharts distribution chart, and alerts panel will be mounted here in step 8.
       </p>
       <div className="inline-block px-3 py-1 bg-slate-100 text-slate-600 rounded text-xs font-mono">
-        Route: /dashboard
+        Route: /officer/dashboard
       </div>
     </div>
   );
