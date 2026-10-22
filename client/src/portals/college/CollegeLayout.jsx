@@ -1,8 +1,8 @@
 import React from 'react';
-import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import DemoRibbon from '../../components/DemoRibbon.jsx';
+import Emblem from '../../components/Emblem.jsx';
 import { useAppStore } from '../../store/useAppStore';
-import { DEMO_RIBBON_TEXT } from '../../constants';
 
 const navItems = [
   {
@@ -45,7 +45,6 @@ const navItems = [
 
 export default function CollegeLayout() {
   const navigate = useNavigate();
-  const location = useLocation();
   const logout = useAppStore((s) => s.logout);
 
   const handleLogout = () => {
@@ -54,31 +53,20 @@ export default function CollegeLayout() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F3F6FA] text-slate-800 antialiased font-sans">
-      {/* Top Header Bar */}
-      <header className="bg-[#0c4a2f] text-white border-b border-emerald-500/30 shadow-md sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <div className="min-h-screen flex flex-col gov-surface text-slate-800 antialiased font-sans">
+      <div className="sticky top-0 z-40">
+        <div className="tricolor-bar" />
+        <DemoRibbon />
+        <header className="bg-[#0c4a2f] text-white border-b border-emerald-900/40 shadow-md">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-[4.25rem] flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 32 32"
-              fill="none"
-              className="w-9 h-9 shrink-0 rounded-lg shadow-sm"
-            >
-              <rect width="32" height="32" rx="8" fill="#0a3622" stroke="#22c55e" strokeWidth="1" />
-              <path d="M19 21V5a2 2 0 00-2-2H15a2 2 0 00-2 2v16m8 0H9m5-14h1m-1 4h1" stroke="#86efac" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <Emblem variant="college" />
             <div>
-              <div className="flex items-center space-x-2">
-                <span className="text-base sm:text-lg font-semibold tracking-tight text-white leading-tight">
-                  College Application Portal
-                </span>
-                <span className="hidden lg:inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-emerald-900/90 text-emerald-200 border border-emerald-700/80">
-                  {DEMO_RIBBON_TEXT}
-                </span>
+              <div className="text-base sm:text-lg font-semibold tracking-tight text-white leading-tight">
+                College Application Portal
               </div>
               <div className="text-xs text-emerald-200">
-                AICTE · Document Submission & Tracking
+                AICTE · Document Submission &amp; Tracking
               </div>
             </div>
           </div>
@@ -103,12 +91,11 @@ export default function CollegeLayout() {
           </div>
         </div>
       </header>
+      </div>
 
-      {/* Main Workspace */}
-      <div className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row gap-6">
-        {/* Sidebar */}
+      <div className="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row gap-6">
         <aside className="w-full md:w-64 shrink-0">
-          <nav aria-label="College Navigation" className="bg-white rounded-xl border border-slate-200/90 shadow-sm p-3 space-y-1.5 sticky top-24">
+          <nav aria-label="College Navigation" className="bg-white rounded-xl border border-slate-200 shadow-sm p-3 space-y-1.5 sticky top-[8.5rem]">
             <div className="px-3 py-2 text-xs font-bold text-slate-500 uppercase tracking-wider">
               Application Workflow
             </div>
@@ -139,7 +126,7 @@ export default function CollegeLayout() {
 
       {/* Footer */}
       <footer className="mt-auto bg-white border-t border-slate-200 py-4 text-center text-xs sm:text-sm text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
           <div>AICTE Application Validation & Compliance Verification Platform · SIH26261</div>
           <div className="text-slate-400 font-mono text-xs">Concept Demo · Advisory Layer</div>
         </div>

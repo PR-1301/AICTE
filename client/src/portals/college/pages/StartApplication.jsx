@@ -53,7 +53,8 @@ export default function StartApplication() {
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 pl-7 overflow-hidden relative">
+        <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#0c4a2f]" aria-hidden="true" />
         <div className="flex items-start justify-between flex-wrap gap-3">
           <div>
             <h1 className="text-2xl font-bold text-slate-800">Start New Application</h1>

@@ -113,9 +113,10 @@ export default function AuditTrail() {
   };
 
   return (
-    <div className="space-y-6 pb-16 max-w-6xl mx-auto">
+    <div className="space-y-6 pb-16">
       {/* 1. Page Header Card */}
-      <div className="bg-white rounded-xl border border-slate-200/90 shadow-xs p-6">
+      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 pl-7 overflow-hidden relative">
+        <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#0F2A4A]" aria-hidden="true" />
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1.5">
             <div className="flex items-center space-x-2">

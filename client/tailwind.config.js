@@ -12,7 +12,7 @@ export default {
       },
       colors: {
         aicte: {
-          navy: '#0A192F',
+          navy: '#0F2A4A',
           deep: '#06101E',
           blue: '#1F6FEB',
           accent: '#2563EB',

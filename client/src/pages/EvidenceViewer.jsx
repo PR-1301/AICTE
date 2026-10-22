@@ -126,7 +126,8 @@ export default function EvidenceViewer() {
   return (
     <div className="space-y-6 pb-16">
       {/* Top Navigation & Finding Switcher Workbench */}
-      <div className="bg-white rounded-xl border border-slate-200/90 shadow-sm p-5 space-y-4">
+      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-5 pl-7 space-y-4 overflow-hidden relative">
+        <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#0F2A4A]" aria-hidden="true" />
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
           <div className="flex items-center space-x-3">
             <Link

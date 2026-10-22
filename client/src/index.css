@@ -3,16 +3,19 @@
 @tailwind utilities;
 
 :root {
+  --aicte-navy: #0f2a4a;
+  --aicte-accent: #1f6feb;
+  --aicte-bg: #f3f6fa;
   font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: #0f172a;
-  background-color: #f4f6f9;
+  background-color: var(--aicte-bg);
   letter-spacing: -0.011em;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background-color: #f3f6fa;
+  background-color: var(--aicte-bg);
   font-size: 16px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -24,7 +27,54 @@ body {
   flex-direction: column;
 }
 
-/* Subtle fade in for notifications */
+@layer components {
+  .tricolor-bar {
+    height: 4px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      #ff9933 0%,
+      #ff9933 33.33%,
+      #ffffff 33.33%,
+      #ffffff 66.66%,
+      #138808 66.66%,
+      #138808 100%
+    );
+  }
+
+  .gov-surface {
+    background-color: #f3f6fa;
+    background-image:
+      radial-gradient(ellipse 80% 40% at 50% -10%, rgba(15, 42, 74, 0.07), transparent 55%),
+      linear-gradient(#e7edf5 1px, transparent 1px),
+      linear-gradient(90deg, #e7edf5 1px, transparent 1px);
+    background-size: auto, 32px 32px, 32px 32px;
+  }
+
+  .skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -100px;
+    z-index: 100;
+    background: #0f2a4a;
+    color: #fff;
+    padding: 0.5rem 0.85rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .skip-link:focus {
+    top: 0.75rem;
+    outline: 2px solid #1f6feb;
+    outline-offset: 2px;
+  }
+
+  .gov-card {
+    @apply bg-white rounded-xl border border-slate-200 shadow-sm;
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -40,7 +90,6 @@ body {
   animation: fadeIn 0.2s ease-out forwards;
 }
 
-/* Accessible reduced motion support (AGENTS.md Section 9) */
 @media (prefers-reduced-motion: reduce) {
   *,
   ::before,

@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import DemoRibbon from '../../components/DemoRibbon.jsx';
+import Emblem from '../../components/Emblem.jsx';
 import { useAppStore } from '../../store/useAppStore';
-import { DEMO_RIBBON_TEXT } from '../../constants';
 
 const navItems = [
   {
@@ -34,31 +35,20 @@ export default function AdminLayout() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F3F6FA] text-slate-800 antialiased font-sans">
-      {/* Top Header Bar */}
-      <header className="bg-[#3b1764] text-white border-b border-purple-500/30 shadow-md sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <div className="min-h-screen flex flex-col gov-surface text-slate-800 antialiased font-sans">
+      <div className="sticky top-0 z-40">
+        <div className="tricolor-bar" />
+        <DemoRibbon />
+        <header className="bg-[#3b1764] text-white border-b border-purple-900/40 shadow-md">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-[4.25rem] flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 32 32"
-              fill="none"
-              className="w-9 h-9 shrink-0 rounded-lg shadow-sm"
-            >
-              <rect width="32" height="32" rx="8" fill="#2e1065" stroke="#a855f7" strokeWidth="1" />
-              <path d="M16 8a4 4 0 100 8 4 4 0 000-8zm-6.5 8.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zm13 0a2.5 2.5 0 100 5 2.5 2.5 0 000-5z" stroke="#d8b4fe" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <Emblem variant="admin" />
             <div>
-              <div className="flex items-center space-x-2">
-                <span className="text-base sm:text-lg font-semibold tracking-tight text-white leading-tight">
-                  Admin Configuration Console
-                </span>
-                <span className="hidden lg:inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-purple-900/90 text-purple-200 border border-purple-700/80">
-                  {DEMO_RIBBON_TEXT}
-                </span>
+              <div className="text-base sm:text-lg font-semibold tracking-tight text-white leading-tight">
+                Admin Configuration Console
               </div>
               <div className="text-xs text-purple-200">
-                AICTE · Checklists & Rule Management
+                AICTE · Checklists &amp; Rule Management
               </div>
             </div>
           </div>
@@ -83,11 +73,11 @@ export default function AdminLayout() {
           </div>
         </div>
       </header>
+      </div>
 
-      {/* Main Workspace */}
-      <div className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row gap-6">
+      <div className="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row gap-6">
         <aside className="w-full md:w-64 shrink-0">
-          <nav aria-label="Admin Navigation" className="bg-white rounded-xl border border-slate-200/90 shadow-sm p-3 space-y-1.5 sticky top-24">
+          <nav aria-label="Admin Navigation" className="bg-white rounded-xl border border-slate-200 shadow-sm p-3 space-y-1.5 sticky top-[8.5rem]">
             <div className="px-3 py-2 text-xs font-bold text-slate-500 uppercase tracking-wider">
               Configuration
             </div>
@@ -116,7 +106,7 @@ export default function AdminLayout() {
       </div>
 
       <footer className="mt-auto bg-white border-t border-slate-200 py-4 text-center text-xs sm:text-sm text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
           <div>AICTE Application Validation & Compliance Verification Platform · SIH26261</div>
           <div className="text-slate-400 font-mono text-xs">Concept Demo · Advisory Layer</div>
         </div>

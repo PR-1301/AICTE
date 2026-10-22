@@ -213,7 +213,8 @@ export default function ApplicationReview() {
 
       {/* Institutional Application Header Card */}
       {/* Institutional Application Header Card */}
-      <div className="bg-white rounded-xl border border-slate-200/90 shadow-sm p-6">
+      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 pl-7 overflow-hidden relative">
+        <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#0F2A4A]" aria-hidden="true" />
         <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-5">
           <div className="space-y-2">
             <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-slate-500">

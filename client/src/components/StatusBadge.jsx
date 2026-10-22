@@ -165,7 +165,7 @@ export default function StatusBadge({ status, size = 'md', className = '' }) {
 
   return (
     <span
-      className={`inline-flex items-center rounded-md border shadow-2xs whitespace-nowrap transition-colors ${config.classes} ${sizeClasses} ${className}`}
+      className={`inline-flex items-center rounded-md border whitespace-nowrap ${config.classes} ${sizeClasses} ${className}`}
       title={config.label}
     >
       {config.icon}

@@ -262,7 +262,8 @@ export default function Dashboard() {
   return (
     <div className="space-y-7 pb-16 text-slate-800">
       {/* 1. Header Banner */}
-      <div className="bg-white rounded-xl border border-slate-200/90 shadow-sm p-6 sm:p-7 flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 sm:p-7 pl-7 sm:pl-8 flex flex-col lg:flex-row lg:items-center justify-between gap-5 overflow-hidden relative">
+        <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#0F2A4A]" aria-hidden="true" />
         <div className="space-y-2.5">
           <div className="inline-flex items-center space-x-2 text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
             <span className="w-2 h-2 rounded-full bg-blue-600"></span>
