@@ -5,7 +5,7 @@ const REQUIRED_DOCS = [
   { id: 'aff', type: 'Affidavit for EoA & Land Details', description: 'Stamped & notarized affidavit', required: true, acceptedFormats: 'PDF, JPG, PNG' },
   { id: 'noc', type: 'Fire Safety NOC', description: 'Valid Fire Safety NOC from State Fire Directorate', required: true, acceptedFormats: 'PDF, JPG' },
   { id: 'land', type: 'Land Title & Ownership Deed', description: 'Registered deed or 7/12 extract', required: true, acceptedFormats: 'PDF, JPG, PNG' },
-  { id: 'naac', type: 'NBA / NAAC Accreditation Certificate', description: 'Current valid accreditation certificate', required: true, acceptedFormats: 'PDF' },
+  { id: 'naac', type: 'NBA / NAAC Accreditation Certificate', description: 'Current valid accreditation certificate', required: false, acceptedFormats: 'PDF' },
   { id: 'ter', type: 'TER Processing Fee Receipt', description: 'Official TER payment receipt', required: true, acceptedFormats: 'PDF, JPG' },
 ];
 

@@ -30,7 +30,7 @@ const PIPELINE_STEPS = [
     subSteps: [
       'Document-type classification (scikit-learn)',
       'Confidence scoring per document',
-      'Checklist matching — 5 / 5 documents mapped',
+      'Checklist matching — 4 documents parsed, 1 mandatory missing',
     ],
     durationMs: 2200,
   },
@@ -271,7 +271,7 @@ export default function AIProcessing() {
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p className="text-xs text-slate-500">Application ID: <strong className="text-slate-700 font-mono">APP-COLLEGE-2026-001</strong> · Status: Queued for Officer Review</p>
+            <p className="text-xs text-slate-500">Application ID: <strong className="text-slate-700 font-mono">APP-001</strong> · Status: Queued for Officer Review</p>
             <button
               onClick={() => navigate('/college/deficiencies')}
               className="py-2.5 px-6 rounded-lg bg-[#0c4a2f] hover:bg-[#0a3622] text-white font-semibold text-sm transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500 flex items-center space-x-2"

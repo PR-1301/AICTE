@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 // Mock deficiency data representing what the officer flagged on APP-001
 const DEFICIENCIES = [
@@ -27,14 +27,13 @@ const DEFICIENCIES = [
   {
     id: 'DEF-003',
     docType: 'TER Processing Fee Receipt',
-    ruleLabel: 'TER Amount Cross-Check',
+    ruleLabel: 'TER Fee Reconciliation',
     status: 'MISMATCH_DETECTED',
     severity: 'medium',
-    officerNote: 'The TER receipt amount (₹1,40,000) does not match the AICTE portal record (₹1,50,000). Please upload the correct receipt or provide a bank transaction ID for clarification.',
+    officerNote: 'The TER receipt amount (₹1,50,000) does not match the mandated AICTE fee schedule (₹2,00,000) for requested intake increase category. Please upload revised payment receipt or fee difference challan.',
     raisedOn: '2026-10-20',
     deadline: '2026-11-04',
-    resolved: true,
-    resolvedNote: 'Correct TER receipt uploaded on 2026-10-21. Amount matches AICTE record.',
+    resolved: false,
   },
   {
     id: 'DEF-004',
@@ -213,6 +212,12 @@ function DeficiencyCard({ deficiency, onResolveToggle }) {
 export default function Deficiencies() {
   const [deficiencies, setDeficiencies] = useState(DEFICIENCIES);
 
+  useEffect(() => {
+    const handleReset = () => setDeficiencies(DEFICIENCIES);
+    window.addEventListener('aicte:reset-demo', handleReset);
+    return () => window.removeEventListener('aicte:reset-demo', handleReset);
+  }, []);
+
   const handleResolveToggle = (id) => {
     setDeficiencies((prev) =>
       prev.map((d) =>
@@ -229,9 +234,19 @@ export default function Deficiencies() {
   return (
     <div className="space-y-6">
       {/* Page Header */}
-      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6">
+      <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 pl-7 overflow-hidden relative">
+        <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#0c4a2f]" aria-hidden="true" />
         <div className="flex items-start justify-between flex-wrap gap-3">
           <div>
+            <div className="flex items-center space-x-2 text-xs font-mono text-slate-500 mb-1">
+              <span className="font-bold text-[#0c4a2f] bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                APP-001
+              </span>
+              <span>•</span>
+              <span className="font-semibold text-slate-700">Demo Institute of Technology</span>
+              <span>•</span>
+              <span className="text-slate-500">EoA - Intake Increase</span>
+            </div>
             <h1 className="text-2xl font-bold text-slate-800">Deficiency Notices</h1>
             <p className="text-sm text-slate-500 mt-1">
               Review flagged deficiencies, read officer remarks, upload corrected documents, and respond to each notice.

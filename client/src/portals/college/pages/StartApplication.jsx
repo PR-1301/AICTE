@@ -17,7 +17,6 @@ const CATEGORY_CHECKLISTS = {
     { id: 'land', type: 'Land Title & Ownership Deed', description: 'Land title confirming adequate area for increased intake.', required: true },
     { id: 'naac', type: 'NBA / NAAC Accreditation Certificate', description: 'Valid accreditation for the programme seeking intake increase.', required: true },
     { id: 'ter', type: 'TER Processing Fee Receipt', description: 'TER payment receipt as per revised intake fee schedule.', required: true },
-    { id: 'infra', type: 'Infrastructure Compliance Certificate', description: 'Architect certificate confirming additional classroom / lab space.', required: true },
   ],
   'EoA - New Course Addition': [
     { id: 'aff', type: 'Affidavit for EoA & Land Details', description: 'Notarized affidavit confirming land area compliance.', required: true },
