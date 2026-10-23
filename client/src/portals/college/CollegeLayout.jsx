@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import DemoRibbon from '../../components/DemoRibbon.jsx';
 import Emblem from '../../components/Emblem.jsx';
 import { useAppStore } from '../../store/useAppStore';
 
@@ -55,8 +54,6 @@ export default function CollegeLayout() {
   return (
     <div className="min-h-screen flex flex-col gov-surface text-slate-800 antialiased font-sans">
       <div className="sticky top-0 z-40">
-        <div className="tricolor-bar" />
-        <DemoRibbon />
         <header className="bg-[#0c4a2f] text-white border-b border-emerald-900/40 shadow-md">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-[4.25rem] flex items-center justify-between">
           <div className="flex items-center space-x-3">

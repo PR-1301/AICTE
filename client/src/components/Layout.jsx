@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import DemoRibbon from './DemoRibbon';
 import ConfirmDialog from './ConfirmDialog';
 import Emblem from './Emblem';
 import { resetDemo } from '../api';
@@ -103,8 +102,6 @@ export default function Layout() {
       </a>
 
       <div className="sticky top-0 z-40">
-        <div className="tricolor-bar" />
-        <DemoRibbon />
         <header className="bg-[#0F2A4A] text-white border-b border-slate-800/80 shadow-md">
           <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-[4.25rem] flex items-center justify-between gap-4">
             <div className="flex items-center space-x-3.5 min-w-0">
@@ -114,7 +111,7 @@ export default function Layout() {
                   AICTE Application Validation Portal
                 </div>
                 <div className="text-xs text-slate-300 truncate">
-                  Ministry of Education · Advisory First-Pass Scrutiny
+                  Advisory First-Pass Scrutiny
                 </div>
               </div>
             </div>

@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppStore } from '../store/useAppStore';
 import { ROLE, DISCLAIMER_ADVISORY } from '../constants';
-import DemoRibbon from '../components/DemoRibbon';
 import Emblem from '../components/Emblem';
 
 const portalCards = [
@@ -62,8 +61,6 @@ export default function Login() {
   return (
     <div className="min-h-screen gov-surface flex flex-col">
       <div className="sticky top-0 z-40">
-        <div className="tricolor-bar" />
-        <DemoRibbon />
         <header className="bg-[#0F2A4A] text-white shadow-md">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-[4.25rem] flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -73,7 +70,7 @@ export default function Login() {
                   AICTE Application Validation Platform
                 </div>
                 <div className="text-xs text-slate-300">
-                  Ministry of Education · Smart India Hackathon 2026 · SIH26261
+                  Smart India Hackathon 2026 · SIH26261
                 </div>
               </div>
             </div>
