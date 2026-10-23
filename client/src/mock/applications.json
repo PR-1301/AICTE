@@ -6,10 +6,10 @@
     "status": "VALIDATION_COMPLETE",
     "submittedOn": "2026-10-12",
     "counts": {
-      "verified": 3,
+      "verified": 4,
       "mismatch": 2,
       "expired": 1,
-      "manualReview": 1
+      "manualReview": 3
     },
     "documents": [
       {

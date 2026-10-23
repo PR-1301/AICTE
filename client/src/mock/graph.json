@@ -1,0 +1,182 @@
+{
+  "nodes": [
+    {
+      "id": "inst-demo",
+      "type": "institution",
+      "label": "Demo Institute of Technology",
+      "subtitle": "Applicant (APP-001)",
+      "x": 60,
+      "y": 180,
+      "details": {
+        "Category": "Private Self-Financing Institute",
+        "AISHE Code": "C-49210",
+        "District": "Pune, Maharashtra",
+        "Application Status": "Active Scrutiny Docket",
+        "Regulatory Notes": "Technical institution applying for Extension of Approval (EoA) and intake expansion."
+      }
+    },
+    {
+      "id": "inst-zenith",
+      "type": "institution",
+      "label": "Zenith Institute of Engineering",
+      "subtitle": "AICTE ID: 1-930412891",
+      "x": 620,
+      "y": 80,
+      "details": {
+        "Category": "Approved Technical College",
+        "AISHE Code": "C-38104",
+        "District": "Solapur, Maharashtra",
+        "Approval Status": "Valid Extension of Approval (AY 2025–26)",
+        "Regulatory Notes": "Autonomous institution operating under approved Directorate jurisdiction."
+      }
+    },
+    {
+      "id": "inst-crest",
+      "type": "institution",
+      "label": "Crestwood Polytechnic Academy",
+      "subtitle": "AICTE ID: 1-847291038",
+      "x": 620,
+      "y": 330,
+      "details": {
+        "Category": "Affiliated Polytechnic Diploma Institute",
+        "AISHE Code": "C-51920",
+        "District": "Nashik, Maharashtra",
+        "Approval Status": "Affiliated Institute on AICTE Central Portal",
+        "Regulatory Notes": "Polytechnic institution offering technical diploma curricula."
+      }
+    },
+    {
+      "id": "cert-fire-dup",
+      "type": "certificate",
+      "label": "Fire NOC #FS-88421",
+      "subtitle": "Duplicate Registration No.",
+      "x": 340,
+      "y": 50,
+      "details": {
+        "Certificate Type": "Directorate of Fire Safety Clearance NOC",
+        "Registration Number": "FS-88421/MH-DIV",
+        "Issuing Authority": "Directorate of Fire & Emergency Services",
+        "Recorded Validity": "15-Jul-2024 to 14-Jul-2027",
+        "Scrutiny Indicator": "Identifier appears identically in filings for Demo Institute and Zenith Institute. Requires cross-verification with state fire registry."
+      }
+    },
+    {
+      "id": "fac-arun",
+      "type": "faculty",
+      "label": "Dr. Arvind Raman (PhD)",
+      "subtitle": "Faculty ID: FAC-9904",
+      "x": 340,
+      "y": 200,
+      "details": {
+        "Designation": "Senior Professor (Computer Science)",
+        "National Portal ID": "NPR-FAC-2018-9904",
+        "Academic Qualification": "Ph.D. in Computer Science & Engineering",
+        "Teaching Experience": "16 Years Academic & Research",
+        "Scrutiny Indicator": "Declared as full-time regular faculty at two independent institutions with concurrent session records."
+      }
+    },
+    {
+      "id": "role-demo",
+      "type": "appointment",
+      "label": "HoD CSE (Full-Time)",
+      "subtitle": "Demo Institute of Technology",
+      "x": 190,
+      "y": 310,
+      "details": {
+        "Appointment Post": "Professor & Head of Department (CSE)",
+        "Tenure Period": "01-Jul-2023 to Present",
+        "Appointment Nature": "Full-Time Approved Post (100% Commitment)",
+        "Weekly Workload": "18 Teaching Hours/Week",
+        "Institutional Record": "Submitted in Faculty Cadre Return Form 2026-27"
+      }
+    },
+    {
+      "id": "role-crest",
+      "type": "appointment",
+      "label": "Dean Academics (Full-Time)",
+      "subtitle": "Crestwood Polytechnic",
+      "x": 480,
+      "y": 310,
+      "details": {
+        "Appointment Post": "Dean Academics & Senior Professor",
+        "Tenure Period": "15-Aug-2024 to 31-Jul-2027",
+        "Appointment Nature": "Full-Time Regular Sanc. Post (100% Commitment)",
+        "Weekly Workload": "16 Teaching Hours/Week",
+        "Institutional Record": "AICTE Faculty Database Annual Census"
+      }
+    },
+    {
+      "id": "trust-saraswati",
+      "type": "trust",
+      "label": "Vidya Educational Foundation",
+      "subtitle": "Reg. Trust No. F-18492",
+      "x": 340,
+      "y": 430,
+      "details": {
+        "Legal Constitution": "Public Charitable Educational Trust",
+        "Registration Act": "Bombay Public Trusts Act, 1950",
+        "Registration Number": "F-18492 (Pune Region)",
+        "Incorporation Year": "1994",
+        "Regulatory Status": "Permissible common sponsoring body. Compliant with AICTE Chapter IV Section 4.2."
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e-demo-cert",
+      "from": "inst-demo",
+      "to": "cert-fire-dup",
+      "relation": "SUBMITTED_AS_FILING",
+      "label": "Submitted filing"
+    },
+    {
+      "id": "e-zenith-cert",
+      "from": "inst-zenith",
+      "to": "cert-fire-dup",
+      "relation": "ACTIVE_RECORD_ON_FILE",
+      "label": "Active record on file"
+    },
+    {
+      "id": "e-demo-role",
+      "from": "inst-demo",
+      "to": "role-demo",
+      "relation": "CONTRACTED_AT",
+      "label": "Contracted post"
+    },
+    {
+      "id": "e-arun-role-demo",
+      "from": "fac-arun",
+      "to": "role-demo",
+      "relation": "CONCURRENT_APPOINTMENT",
+      "label": "Reported appointment"
+    },
+    {
+      "id": "e-crest-role",
+      "from": "inst-crest",
+      "to": "role-crest",
+      "relation": "CONTRACTED_AT",
+      "label": "Contracted post"
+    },
+    {
+      "id": "e-arun-role-crest",
+      "from": "fac-arun",
+      "to": "role-crest",
+      "relation": "CONCURRENT_APPOINTMENT",
+      "label": "Reported appointment"
+    },
+    {
+      "id": "e-demo-trust",
+      "from": "inst-demo",
+      "to": "trust-saraswati",
+      "relation": "SPONSORED_BY",
+      "label": "Sponsored by trust"
+    },
+    {
+      "id": "e-zenith-trust",
+      "from": "inst-zenith",
+      "to": "trust-saraswati",
+      "relation": "SPONSORED_BY",
+      "label": "Sponsored by trust"
+    }
+  ]
+}

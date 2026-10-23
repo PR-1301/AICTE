@@ -2,6 +2,7 @@ import initialApplications from '../mock/applications.json';
 import initialFindings from '../mock/findings.json';
 import initialAudit from '../mock/audit.json';
 import initialAlerts from '../mock/alerts.json';
+import initialGraph from '../mock/graph.json';
 import {
   AUDIT_ACTION,
   AUDIT_ACTOR,
@@ -20,6 +21,7 @@ let applications = clone(initialApplications);
 let findings = clone(initialFindings);
 let auditTrail = clone(initialAudit);
 let alerts = clone(initialAlerts);
+let graph = clone(initialGraph);
 
 function get90DaysLimit(anchorStr) {
   const d = new Date(anchorStr + 'T00:00:00Z');
@@ -264,6 +266,13 @@ export const mockDb = {
     return deriveAlerts();
   },
 
+  getGraph: (appId) => {
+    if (graph && graph[appId]) {
+      return clone(graph[appId]);
+    }
+    return clone(graph);
+  },
+
   /**
    * Submit officer decision. Supports both:
    * submitDecision(appId, decision, remarks, officerId)
@@ -343,6 +352,7 @@ export const mockDb = {
     findings = clone(initialFindings);
     auditTrail = clone(initialAudit);
     alerts = clone(initialAlerts);
+    graph = clone(initialGraph);
     return true;
   },
 };

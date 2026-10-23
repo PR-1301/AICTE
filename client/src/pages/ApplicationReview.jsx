@@ -6,7 +6,7 @@ import SeverityTag from '../components/SeverityTag';
 import ErrorState from '../components/ErrorState';
 import DecisionPanel from '../portals/officer/components/DecisionPanel';
 import AuditTimeline from '../portals/officer/components/AuditTimeline';
-import { FINDING_STATUS, SEVERITY } from '../constants';
+import { FINDING_STATUS, SEVERITY, LINK_TYPE_LABELS } from '../constants';
 
 /**
  * Urgency sorting comparator.
@@ -143,7 +143,9 @@ export default function ApplicationReview() {
         f.rule.includes('RECONCILIATION') ||
         f.rule === 'TER_FEE_RECONCILIATION' ||
         f.rule === 'INSTITUTE_NAME_MATCH' ||
-        f.rule === 'LAND_AREA_CONSISTENCY'
+        f.rule === 'LAND_AREA_CONSISTENCY' ||
+        f.rule === 'CROSS_INSTITUTION_LINK' ||
+        Boolean(f.linkType)
     )
     .sort(sortByUrgency);
 
@@ -549,6 +551,19 @@ export default function ApplicationReview() {
                         <span className="text-xs font-mono font-bold text-[#0F2A4A] bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
                           {f.rule}
                         </span>
+                        {(f.rule === 'CROSS_INSTITUTION_LINK' || f.linkType) && (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-900 border border-purple-300 gap-1 shadow-2xs">
+                            <svg className="w-3 h-3 text-purple-700 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                            </svg>
+                            <span>Cross-institution</span>
+                          </span>
+                        )}
+                        {f.linkType && (
+                          <span className="text-xs font-semibold px-2 py-0.5 rounded bg-blue-50 text-blue-800 border border-blue-200">
+                            {LINK_TYPE_LABELS[f.linkType] || f.linkType}
+                          </span>
+                        )}
                         <StatusBadge status={f.status} size="sm" />
                         <SeverityTag severity={f.severity} size="sm" />
                         <span className="text-xs text-slate-500 font-mono font-semibold">
@@ -559,6 +574,21 @@ export default function ApplicationReview() {
                       <p className="text-sm font-medium text-slate-800 leading-relaxed">
                         {f.explanation}
                       </p>
+
+                      {/* Corroborated Evidence Path for link findings */}
+                      {f.evidencePath && f.evidencePath.length > 0 && (
+                        <div className="flex flex-wrap items-center gap-1.5 text-xs text-slate-600 pt-1 font-mono">
+                          <span className="font-bold text-slate-700 font-sans">Corroborated Path:</span>
+                          {f.evidencePath.map((nodeId, idx) => (
+                            <span key={nodeId} className="inline-flex items-center">
+                              <span className="bg-slate-100 px-2 py-0.5 rounded border border-slate-200 text-slate-800 font-semibold text-[11px]">
+                                {nodeId}
+                              </span>
+                              {idx < f.evidencePath.length - 1 && <span className="text-slate-400 mx-1">&rarr;</span>}
+                            </span>
+                          ))}
+                        </div>
+                      )}
 
                       {/* Summary of compared documents */}
                       {f.evidence && f.evidence.length > 1 && (
@@ -580,7 +610,7 @@ export default function ApplicationReview() {
                         to={`/officer/applications/${appId}/findings/${f.id}`}
                         className="inline-flex items-center space-x-1 px-3.5 py-2 rounded-lg bg-[#0F2A4A] text-white text-xs font-bold hover:bg-[#1F6FEB] transition-colors shadow-xs"
                       >
-                        <span>Open Evidence Viewer</span>
+                        <span>{f.linkType ? 'Open Link Analysis' : 'Open Evidence Viewer'}</span>
                         <span aria-hidden="true">&rarr;</span>
                       </Link>
                     </div>

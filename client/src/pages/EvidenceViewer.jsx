@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getApplication, getFinding, getFindings } from '../api';
 import DocViewer from '../components/DocViewer';
+import LinkGraph from '../components/LinkGraph';
 import FindingCard from '../components/FindingCard';
 import StatusBadge from '../components/StatusBadge';
 import ErrorState from '../components/ErrorState';
-import { FINDING_STATUS } from '../constants';
+import { FINDING_STATUS, LINK_TYPE_LABELS } from '../constants';
 
 /**
  * Evidence Viewer Page (Hero Screen - AGENTS.md Section 5.1).
@@ -147,7 +148,7 @@ export default function EvidenceViewer() {
                 Application <span className="font-mono font-bold text-[#0A192F]">{appId}</span> · {application.institute}
               </div>
               <h1 className="text-xl sm:text-2xl font-extrabold text-[#0A192F] tracking-tight">
-                Dual Document Scrutiny Workbench
+                {finding.linkType ? 'Cross-Institution Link Analysis Workbench' : 'Dual Document Scrutiny Workbench'}
               </h1>
             </div>
           </div>
@@ -183,7 +184,9 @@ export default function EvidenceViewer() {
                   >
                     <span
                       className={`w-2 h-2 rounded-full ${
-                        isStatusVerified
+                        f.linkType
+                          ? 'bg-purple-500'
+                          : isStatusVerified
                           ? 'bg-emerald-500'
                           : isStatusExpired
                           ? 'bg-rose-500'
@@ -192,7 +195,10 @@ export default function EvidenceViewer() {
                           : 'bg-indigo-500'
                       }`}
                     />
-                    <span>Finding {idx + 1}: {f.id}</span>
+                    <span>
+                      Finding {idx + 1}: {f.id}
+                      {f.linkType ? ' (Link)' : ''}
+                    </span>
                   </button>
                 );
               })}
@@ -201,10 +207,15 @@ export default function EvidenceViewer() {
         )}
       </div>
 
-      {/* Hero Visual Area: Two Side-By-Side DocViewers / Evidence Cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
-        {/* Left Document View */}
-        <div className="min-h-[480px]">
+      {/* Visual Scrutiny Area: LinkGraph for cross-institution findings OR Side-by-Side DocViewers */}
+      {finding.linkType ? (
+        <div className="w-full">
+          <LinkGraph finding={finding} appId={appId} />
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+          {/* Left Document View */}
+          <div className="min-h-[480px]">
           <DocViewer
             doc={primaryDoc}
             title={primaryEvidence?.docName || primaryDoc?.type || 'Primary Statutory Filing'}
@@ -344,8 +355,9 @@ export default function EvidenceViewer() {
           )}
         </div>
       </div>
+      )}
 
-      {/* Finding Card Below Side-by-Side Viewers */}
+      {/* Finding Card Below Scrutiny Area */}
       <div className="mt-6">
         <FindingCard finding={finding} />
       </div>

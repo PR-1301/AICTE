@@ -2,7 +2,7 @@ import React from 'react';
 import StatusBadge from './StatusBadge';
 import SeverityTag from './SeverityTag';
 import ConfidenceBar from './ConfidenceBar';
-import { DISCLAIMER_PRELIMINARY, FINDING_STATUS } from '../constants';
+import { DISCLAIMER_PRELIMINARY, FINDING_STATUS, LINK_TYPE_LABELS } from '../constants';
 
 /**
  * Shared FindingCard component.
@@ -14,9 +14,10 @@ export default function FindingCard({ finding, className = '' }) {
   if (!finding) return null;
 
   const evidence = finding.evidence || [];
-  const isMismatch = evidence.length >= 2;
-  const isExpired = finding.status === FINDING_STATUS.EXPIRED || (evidence.length === 1 && !isMismatch);
-  const isMissing = evidence.length === 0 || finding.status === FINDING_STATUS.MANUAL_REVIEW_REQUIRED;
+  const isLinkAnalysis = Boolean(finding.linkType);
+  const isMismatch = !isLinkAnalysis && evidence.length >= 2;
+  const isExpired = !isLinkAnalysis && (finding.status === FINDING_STATUS.EXPIRED || (evidence.length === 1 && !isMismatch));
+  const isMissing = !isLinkAnalysis && (evidence.length === 0 || finding.status === FINDING_STATUS.MANUAL_REVIEW_REQUIRED);
 
   return (
     <div className={`bg-white rounded-xl border border-slate-200/90 shadow-sm p-6 space-y-6 ${className}`}>
@@ -45,6 +46,44 @@ export default function FindingCard({ finding, className = '' }) {
           <span>Comparative Evidence Extraction</span>
           <span className="font-mono text-[11px] text-slate-400">Resolution: Normalized Dual Scan</span>
         </div>
+
+        {/* Case: Cross-Institution Link Analysis */}
+        {isLinkAnalysis && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="bg-white p-4 rounded-xl border border-purple-200 shadow-xs space-y-2">
+              <span className="text-xs font-semibold text-purple-800 uppercase tracking-wider block">
+                Link Analysis Type
+              </span>
+              <div className="text-base font-extrabold text-slate-900">
+                {LINK_TYPE_LABELS[finding.linkType] || finding.linkType}
+              </div>
+              <div className="text-xs text-slate-600 font-mono">
+                Pattern: Inter-Institutional Graph Linkage
+              </div>
+              <div className="pt-1">
+                <span className="text-xs font-bold text-purple-900 bg-purple-50 border border-purple-300 px-3 py-1 rounded-lg inline-block">
+                  Cross-Institution Verification Required
+                </span>
+              </div>
+            </div>
+
+            <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs space-y-2">
+              <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">
+                Corroborated Path Nodes
+              </span>
+              <div className="text-xs font-mono font-bold text-slate-800">
+                {finding.evidencePath?.length || 0} Entities in Correlation Path
+              </div>
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {finding.evidencePath?.map((id) => (
+                  <span key={id} className="text-xs font-mono bg-slate-100 text-slate-800 px-2 py-0.5 rounded border border-slate-200 font-semibold">
+                    {id}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Case 1: Mismatch (2 values compared side by side) */}
         {isMismatch && (

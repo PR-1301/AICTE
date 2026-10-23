@@ -84,3 +84,14 @@ export async function resetDemo() {
   await delay(100);
   return mockDb.resetDemo();
 }
+
+/**
+ * Fetch cross-institution relationship graph data for an application.
+ * @param {string} appId
+ * @returns {Promise<Object>}
+ */
+export async function getGraph(appId) {
+  await delay();
+  return mockDb.getGraph(appId);
+}
+

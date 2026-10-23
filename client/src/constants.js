@@ -50,13 +50,30 @@ export const SEVERITY = {
   LOW: 'low',
   MEDIUM: 'medium',
   HIGH: 'high',
+  INFO: 'info',
 };
 
 export const SEVERITY_LABELS = {
   [SEVERITY.LOW]: 'Low Severity',
   [SEVERITY.MEDIUM]: 'Medium Severity',
   [SEVERITY.HIGH]: 'High Severity',
+  [SEVERITY.INFO]: 'Informational',
 };
+
+// Cross-institution link analysis types
+export const LINK_TYPE = {
+  DUPLICATE_IDENTIFIER: 'DUPLICATE_IDENTIFIER',
+  TEMPORAL_CONFLICT: 'TEMPORAL_CONFLICT',
+  SHARED_TRUST: 'SHARED_TRUST',
+};
+
+export const LINK_TYPE_LABELS = {
+  [LINK_TYPE.DUPLICATE_IDENTIFIER]: 'Duplicate Identifier',
+  [LINK_TYPE.TEMPORAL_CONFLICT]: 'Temporal Conflict',
+  [LINK_TYPE.SHARED_TRUST]: 'Shared Trust',
+};
+
+export const RULE_CROSS_INSTITUTION_LINK = 'CROSS_INSTITUTION_LINK';
 
 // Officer decision types
 export const DECISION_TYPE = {

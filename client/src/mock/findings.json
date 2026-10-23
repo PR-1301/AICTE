@@ -325,5 +325,55 @@
         "bbox": { "x": 0.2, "y": 0.4, "w": 0.5, "h": 0.05 }
       }
     ]
+  },
+  {
+    "id": "F-006",
+    "applicationId": "APP-001",
+    "rule": "CROSS_INSTITUTION_LINK",
+    "linkType": "DUPLICATE_IDENTIFIER",
+    "status": "MANUAL_REVIEW_REQUIRED",
+    "severity": "high",
+    "confidence": 0.95,
+    "explanation": "Fire Safety NOC registration number FS-88421 matches active certification record registered for Zenith Institute of Engineering. Preliminary indicator requiring inter-institutional verification.",
+    "evidencePath": [
+      "inst-demo",
+      "cert-fire-dup",
+      "inst-zenith"
+    ],
+    "evidence": []
+  },
+  {
+    "id": "F-007",
+    "applicationId": "APP-001",
+    "rule": "CROSS_INSTITUTION_LINK",
+    "linkType": "TEMPORAL_CONFLICT",
+    "status": "MANUAL_REVIEW_REQUIRED",
+    "severity": "high",
+    "confidence": 0.92,
+    "explanation": "Faculty member Dr. Arvind Raman (ID: FAC-9904) is recorded as holding full-time teaching appointments at two separate technical institutions during overlapping period 2024–2026. Preliminary indicator requiring institutional verification.",
+    "evidencePath": [
+      "inst-demo",
+      "role-demo",
+      "fac-arun",
+      "role-crest",
+      "inst-crest"
+    ],
+    "evidence": []
+  },
+  {
+    "id": "F-008",
+    "applicationId": "APP-001",
+    "rule": "CROSS_INSTITUTION_LINK",
+    "linkType": "SHARED_TRUST",
+    "status": "VERIFIED",
+    "severity": "info",
+    "confidence": 0.99,
+    "explanation": "Demo Institute of Technology and Zenith Institute of Engineering share common sponsoring trust (Vidya Educational Foundation). Common trust linkages are permissible under AICTE regulations.",
+    "evidencePath": [
+      "inst-demo",
+      "trust-saraswati",
+      "inst-zenith"
+    ],
+    "evidence": []
   }
 ]
