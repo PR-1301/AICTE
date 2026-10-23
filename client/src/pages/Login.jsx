@@ -15,8 +15,8 @@ const portalCards = [
     headerClass: 'bg-[#0F2A4A]',
     accentBorder: 'border-[#1F6FEB]',
     accentBg: 'bg-[#1F6FEB]',
-    badge: 'Primary demo path',
-    badgeColor: 'bg-amber-100 text-amber-900 border-amber-300',
+    badge: 'Review & Decision',
+    badgeColor: 'bg-blue-100 text-blue-900 border-blue-300',
     variant: 'officer',
   },
   {
